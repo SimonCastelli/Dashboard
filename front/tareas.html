@@ -31,8 +31,8 @@
   <main class="main">
     <div class="page-hd">
       <div class="page-hd-row">
-        <div><p class="k">tareas · 5 abiertas · 1 hecha</p><h1>Tareas</h1></div>
-        <div class="page-hd-actions"><button class="btn btn-secondary">Importar de Bandeja</button><button class="btn btn-primary blueprint" data-open-capture="Tarea">+ Nueva tarea<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button></div>
+        <div><p class="k">tareas · <span data-badge="tasks-open">5</span> abiertas · <span data-tasks-done-count>1</span> hecha</p><h1>Tareas</h1></div>
+        <div class="page-hd-actions"><button class="btn btn-secondary" data-import-bandeja>Importar de Bandeja</button><button class="btn btn-primary blueprint" data-open-capture="Tarea">+ Nueva tarea<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button></div>
       </div>
       <div class="tools">
         <div class="seg">
@@ -41,7 +41,7 @@
           <label class="seg-opt"><input type="radio" name="task-view" value="done">Hechas</label>
           <label class="seg-opt"><input type="radio" name="task-view" value="all">Todas</label>
         </div>
-        <input class="input" placeholder="Buscar tarea…" style="max-width:220px">
+        <input class="input" placeholder="Buscar tarea…" style="max-width:220px" data-search="tasks">
         <span class="mut" style="font-size:12px">agrupado por vencimiento</span>
       </div>
     </div>
@@ -57,7 +57,7 @@
           </div>
           <span class="tag tag-accent">facultad</span>
           <span class="row-due mut num">hoy 18:00</span>
-        </li>        <li class="row" data-list-row data-status="open">
+        </li>        <li class="row" data-list-row data-status="open" data-id="t6">
           <button class="check" aria-pressed="false" aria-label="Completar"></button>
           <div class="row-body">
             <span class="label">Leer 30 min</span>
@@ -107,14 +107,16 @@
           <span class="row-due mut num">ayer</span>
         </li>
         </ul>
+        <p class="group-hd k" data-group="extra" hidden>otras</p>
+        <ul class="rows" data-tasks-extra hidden></ul>
       </div>
 
       <aside class="split-detail">
         <div class="detail-hd">
           <p class="k">editar tarea</p>
           <div class="detail-actions">
-            <button class="btn btn-ghost btn-icon" aria-label="Duplicar">⧉</button>
-            <button class="btn btn-ghost btn-icon" aria-label="Eliminar">✕</button>
+            <button class="btn btn-ghost btn-icon" aria-label="Duplicar" data-duplicate-detail>⧉</button>
+            <button class="btn btn-ghost btn-icon" aria-label="Eliminar" data-delete-detail>✕</button>
           </div>
         </div>
         <div class="field"><label for="t-title">Título</label><input class="input" id="t-title" value="Terminar TP2 de BD"></div>
@@ -125,25 +127,21 @@
         </div>
         <div class="field">
           <label>Prioridad</label>
-          <div class="seg"><label class="seg-opt"><input type="radio" name="prio">Baja</label><label class="seg-opt"><input type="radio" name="prio">Media</label><label class="seg-opt"><input type="radio" name="prio" checked>Alta</label></div>
+          <div class="seg" id="t-prio"><label class="seg-opt"><input type="radio" name="prio" value="Baja">Baja</label><label class="seg-opt"><input type="radio" name="prio" value="Media">Media</label><label class="seg-opt"><input type="radio" name="prio" value="Alta" checked>Alta</label></div>
         </div>
         <div class="field">
           <label>Lista</label>
-          <div class="chips">
-            <button class="tag tag-accent" aria-pressed="true">facultad</button>
-            <button class="tag tag-outline" aria-pressed="false">personal</button>
-            <button class="tag tag-outline" aria-pressed="false">freelance</button>
-            <button class="tag tag-outline" aria-pressed="false">lectura</button>
+          <div class="chips" id="t-list" data-chips-exclusive>
+            <button class="tag tag-accent" aria-pressed="true" data-value="facultad">facultad</button>
+            <button class="tag tag-outline" aria-pressed="false" data-value="personal">personal</button>
+            <button class="tag tag-outline" aria-pressed="false" data-value="freelance">freelance</button>
+            <button class="tag tag-outline" aria-pressed="false" data-value="lectura">lectura</button>
           </div>
         </div>
         <div class="field">
-          <label for="t-sub">Subtareas · 1 de 3</label>
-          <ul class="rows compact" id="t-sub">
-            <li class="row"><button class="check" aria-pressed="true" aria-label="Completar"></button><span class="label done">Consultas 1 a 3</span></li>
-            <li class="row"><button class="check" aria-pressed="false" aria-label="Completar"></button><span class="label">Consultas 4 y 5</span></li>
-            <li class="row"><button class="check" aria-pressed="false" aria-label="Completar"></button><span class="label">Diagrama ER</span></li>
-          </ul>
-          <input class="input" placeholder="+ Agregar subtarea">
+          <label for="t-sub-add">Subtareas · <span data-sub-count>1 de 3</span></label>
+          <ul class="rows compact" id="t-sub"></ul>
+          <input class="input" id="t-sub-add" placeholder="+ Agregar subtarea (Enter)">
         </div>
         <details class="config">
           <summary>Configuración de tareas</summary>
@@ -158,8 +156,8 @@
           </div>
         </details>
         <div class="detail-foot">
-          <button class="btn btn-secondary">Descartar</button>
-          <button class="btn btn-primary">Guardar cambios</button>
+          <button class="btn btn-secondary" data-discard-detail>Descartar</button>
+          <button class="btn btn-primary" data-save-detail>Guardar cambios</button>
         </div>
       </aside>
     </div>

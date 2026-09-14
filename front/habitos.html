@@ -32,7 +32,7 @@
     <div class="page-hd">
       <div class="page-hd-row">
         <div><p class="k">hábitos · 6 activos · 2 en pausa</p><h1>Hábitos</h1></div>
-        <div class="page-hd-actions"><button class="btn btn-secondary">Ver historial</button><button class="btn btn-primary blueprint">+ Nuevo hábito<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button></div>
+        <div class="page-hd-actions"><button class="btn btn-secondary" data-view-history>Ver historial</button><button class="btn btn-primary blueprint" data-new-habit>+ Nuevo hábito<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button></div>
       </div>
       <div class="tools">
         <div class="seg">
@@ -47,35 +47,35 @@
       <div class="split-list">
         <p class="group-hd k">hoy, martes 14</p>
         <ul class="rows">
-        <li class="row habit-row is-active" data-list-row>
+        <li class="row habit-row is-active" data-list-row data-id="h-correr">
           <button class="check" aria-pressed="true" aria-label="Marcar hoy"></button>
           <div class="row-body">
             <span class="label">Correr</span>
-            <span class="row-meta mut">lun, mié, vie · racha 12 días · récord 21 días</span>
+            <span class="row-meta mut" data-habit-meta>lun, mié, vie · racha 12 días · récord 21 días</span>
             <div class="dots wide" data-habit="h-correr"><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i></div>
           </div>
           <span class="row-due mut num">86%</span>
-        </li>        <li class="row habit-row" data-list-row>
+        </li>        <li class="row habit-row" data-list-row data-id="h-leer">
           <button class="check" aria-pressed="true" aria-label="Marcar hoy"></button>
           <div class="row-body">
             <span class="label">Leer 30 min</span>
-            <span class="row-meta mut">todos los días · racha 4 días · récord 33 días</span>
+            <span class="row-meta mut" data-habit-meta>todos los días · racha 4 días · récord 33 días</span>
             <div class="dots wide" data-habit="h-leer"><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i></div>
           </div>
           <span class="row-due mut num">74%</span>
-        </li>        <li class="row habit-row" data-list-row>
+        </li>        <li class="row habit-row" data-list-row data-id="h-meditar">
           <button class="check" aria-pressed="false" aria-label="Marcar hoy"></button>
           <div class="row-body">
             <span class="label">Meditar</span>
-            <span class="row-meta mut">todos los días · racha 0 días · récord 11 días</span>
+            <span class="row-meta mut" data-habit-meta>todos los días · racha 0 días · récord 11 días</span>
             <div class="dots wide" data-habit="h-meditar"><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i></div>
           </div>
           <span class="row-due mut num">38%</span>
-        </li>        <li class="row habit-row" data-list-row>
+        </li>        <li class="row habit-row" data-list-row data-id="h-estudiar">
           <button class="check" aria-pressed="true" aria-label="Marcar hoy"></button>
           <div class="row-body">
             <span class="label">Estudiar 1 h</span>
-            <span class="row-meta mut">lun a vie · racha 6 días · récord 14 días</span>
+            <span class="row-meta mut" data-habit-meta>lun a vie · racha 6 días · récord 14 días</span>
             <div class="dots wide" data-habit="h-estudiar"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i></div>
           </div>
           <span class="row-due mut num">69%</span>
@@ -83,19 +83,19 @@
         </ul>
         <p class="group-hd k">semanales</p>
         <ul class="rows">
-        <li class="row habit-row" data-list-row>
+        <li class="row habit-row" data-list-row data-id="h-ingles">
           <button class="check" aria-pressed="false" aria-label="Marcar hoy"></button>
           <div class="row-body">
             <span class="label">Inglés — 3 sesiones</span>
-            <span class="row-meta mut">3 por semana · racha 2 semanas · récord 9 semanas</span>
+            <span class="row-meta mut" data-habit-meta>3 por semana · racha 2 semanas · récord 9 semanas</span>
             <div class="dots wide" data-habit="h-ingles"><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i></div>
           </div>
           <span class="row-due mut num">63%</span>
-        </li>        <li class="row habit-row" data-list-row>
+        </li>        <li class="row habit-row" data-list-row data-id="h-finanzas">
           <button class="check" aria-pressed="false" aria-label="Marcar hoy"></button>
           <div class="row-body">
             <span class="label">Revisar finanzas</span>
-            <span class="row-meta mut">domingos · racha 5 semanas · récord 12 semanas</span>
+            <span class="row-meta mut" data-habit-meta>domingos · racha 5 semanas · récord 12 semanas</span>
             <div class="dots wide" data-habit="h-finanzas"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i></div>
           </div>
           <span class="row-due mut num">91%</span>
@@ -103,8 +103,8 @@
         </ul>
         <p class="group-hd k">en pausa</p>
         <ul class="rows">
-          <li class="row is-paused" data-list-row><div class="row-body"><span class="label mut">Nadar</span><span class="row-meta mut">en pausa desde el 01/08</span></div><button class="btn btn-ghost" style="font-size:12px">Reactivar</button></li>
-          <li class="row is-paused" data-list-row><div class="row-body"><span class="label mut">Dibujar</span><span class="row-meta mut">en pausa desde el 22/07</span></div><button class="btn btn-ghost" style="font-size:12px">Reactivar</button></li>
+          <li class="row is-paused" data-list-row data-id="h-nadar"><div class="row-body"><span class="label mut">Nadar</span><span class="row-meta mut">en pausa desde el 01/08</span></div><button class="btn btn-ghost" style="font-size:12px" data-reactivate-habit>Reactivar</button></li>
+          <li class="row is-paused" data-list-row data-id="h-dibujar"><div class="row-body"><span class="label mut">Dibujar</span><span class="row-meta mut">en pausa desde el 22/07</span></div><button class="btn btn-ghost" style="font-size:12px" data-reactivate-habit>Reactivar</button></li>
         </ul>
       </div>
 
@@ -112,8 +112,8 @@
         <div class="detail-hd">
           <p class="k">editar hábito</p>
           <div class="detail-actions">
-            <button class="btn btn-ghost btn-icon" aria-label="Pausar">❙❙</button>
-            <button class="btn btn-ghost btn-icon" aria-label="Eliminar">✕</button>
+            <button class="btn btn-ghost btn-icon" aria-label="Pausar" data-pause-habit>❙❙</button>
+            <button class="btn btn-ghost btn-icon" aria-label="Eliminar" data-delete-detail>✕</button>
           </div>
         </div>
         <div class="field"><label for="h-name">Nombre</label><input class="input" id="h-name" value="Correr"></div>
@@ -123,32 +123,32 @@
         </div>
         <div class="field">
           <label>Frecuencia</label>
-          <div class="seg"><label class="seg-opt"><input type="radio" name="h-freq">Diario</label><label class="seg-opt"><input type="radio" name="h-freq" checked>Días fijos</label><label class="seg-opt"><input type="radio" name="h-freq">N por semana</label></div>
+          <div class="seg" id="h-freq"><label class="seg-opt"><input type="radio" name="h-freq" value="Diario">Diario</label><label class="seg-opt"><input type="radio" name="h-freq" value="Días fijos" checked>Días fijos</label><label class="seg-opt"><input type="radio" name="h-freq" value="N por semana">N por semana</label></div>
         </div>
         <div class="field">
           <label>Días</label>
-          <div class="chips">
-            <button class="tag tag-accent" aria-pressed="true">L</button>
-            <button class="tag tag-outline" aria-pressed="false">M</button>
-            <button class="tag tag-accent" aria-pressed="true">M</button>
-            <button class="tag tag-outline" aria-pressed="false">J</button>
-            <button class="tag tag-accent" aria-pressed="true">V</button>
-            <button class="tag tag-outline" aria-pressed="false">S</button>
-            <button class="tag tag-outline" aria-pressed="false">D</button>
+          <div class="chips" id="h-days">
+            <button class="tag tag-accent" aria-pressed="true" data-value="L">L</button>
+            <button class="tag tag-outline" aria-pressed="false" data-value="M1">M</button>
+            <button class="tag tag-accent" aria-pressed="true" data-value="M2">M</button>
+            <button class="tag tag-outline" aria-pressed="false" data-value="J">J</button>
+            <button class="tag tag-accent" aria-pressed="true" data-value="V">V</button>
+            <button class="tag tag-outline" aria-pressed="false" data-value="S">S</button>
+            <button class="tag tag-outline" aria-pressed="false" data-value="D">D</button>
           </div>
         </div>
         <div class="field">
           <label>Tipo de registro</label>
-          <div class="seg"><label class="seg-opt"><input type="radio" name="h-type">Sí / no</label><label class="seg-opt"><input type="radio" name="h-type" checked>Cantidad</label><label class="seg-opt"><input type="radio" name="h-type">Tiempo</label></div>
+          <div class="seg" id="h-type"><label class="seg-opt"><input type="radio" name="h-type" value="Sí / no">Sí / no</label><label class="seg-opt"><input type="radio" name="h-type" value="Cantidad" checked>Cantidad</label><label class="seg-opt"><input type="radio" name="h-type" value="Tiempo">Tiempo</label></div>
         </div>
         <div class="field">
           <label>Este mes</label>
-          <div class="dots month-dots"><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i></div>
-          <span class="mut" style="font-size:11.5px">18 de 21 días previstos · 92 km acumulados</span>
+          <div class="dots month-dots" id="h-month-dots"></div>
+          <span class="mut" style="font-size:11.5px" data-habit-month-note>18 de 21 días previstos · 92 km acumulados</span>
         </div>
         <div class="stats two">
-          <div class="stat"><p class="k">racha actual</p><strong>12 días</strong></div>
-          <div class="stat"><p class="k">cumplimiento 30 d</p><strong>86%</strong><div class="bar"><span style="width:86%"></span></div></div>
+          <div class="stat"><p class="k">racha actual</p><strong data-habit-streak>12 días</strong></div>
+          <div class="stat"><p class="k">cumplimiento 30 d</p><strong data-habit-compliance>86%</strong><div class="bar"><span data-habit-bar style="width:86%"></span></div></div>
         </div>
         <details class="config">
           <summary>Configuración de hábitos</summary>
@@ -162,8 +162,8 @@
           </div>
         </details>
         <div class="detail-foot">
-          <button class="btn btn-secondary">Descartar</button>
-          <button class="btn btn-primary">Guardar cambios</button>
+          <button class="btn btn-secondary" data-discard-detail>Descartar</button>
+          <button class="btn btn-primary" data-save-detail>Guardar cambios</button>
         </div>
       </aside>
     </div>

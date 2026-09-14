@@ -32,16 +32,16 @@
     <div class="page-hd">
       <div class="page-hd-row">
         <div><p class="k">notas · 24 en total · 3 fijadas</p><h1>Notas</h1></div>
-        <div class="page-hd-actions"><button class="btn btn-secondary">Exportar .md</button><button class="btn btn-primary blueprint" data-open-capture="Nota">+ Nueva nota<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button></div>
+        <div class="page-hd-actions"><button class="btn btn-secondary" data-export-notes>Exportar .md</button><button class="btn btn-primary blueprint" data-open-capture="Nota">+ Nueva nota<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button></div>
       </div>
       <div class="tools">
-        <input class="input" placeholder="Buscar en las notas…" style="max-width:260px">
-        <div class="chips">
-          <button class="tag tag-accent" aria-pressed="true">todas</button>
-          <button class="tag tag-outline" aria-pressed="false">facultad</button>
-          <button class="tag tag-outline" aria-pressed="false">ideas</button>
-          <button class="tag tag-outline" aria-pressed="false">diario</button>
-          <button class="tag tag-outline" aria-pressed="false">lectura</button>
+        <input class="input" placeholder="Buscar en las notas…" style="max-width:260px" data-search="notes">
+        <div class="chips" data-chips-filter="notes" data-chips-exclusive>
+          <button class="tag tag-accent" aria-pressed="true" data-value="todas">todas</button>
+          <button class="tag tag-outline" aria-pressed="false" data-value="facultad">facultad</button>
+          <button class="tag tag-outline" aria-pressed="false" data-value="ideas">ideas</button>
+          <button class="tag tag-outline" aria-pressed="false" data-value="diario">diario</button>
+          <button class="tag tag-outline" aria-pressed="false" data-value="lectura">lectura</button>
         </div>
       </div>
     </div>
@@ -49,21 +49,21 @@
       <div class="split-list">
         <p class="group-hd k">fijadas</p>
         <ul class="rows">
-        <li class="row note-row is-active" data-list-row>
+        <li class="row note-row is-active" data-list-row data-id="n1" data-tag="facultad">
           <div class="row-body">
             <span class="label">Resumen SO — capítulo 4</span>
             <span class="row-meta mut">Planificación de procesos: FCFS, SJF, round robin. Quantum y cambio de contexto…</span>
           </div>
           <span class="tag tag-accent">facultad</span>
           <span class="row-due mut num">hoy</span>
-        </li>        <li class="row note-row" data-list-row>
+        </li>        <li class="row note-row" data-list-row data-id="n2" data-tag="ideas">
           <div class="row-body">
             <span class="label">Ideas TP final</span>
             <span class="row-meta mut">Tablero de materias con scraping del SIU + recordatorios de parciales.</span>
           </div>
           <span class="tag tag-neutral">ideas</span>
           <span class="row-due mut num">12/09</span>
-        </li>        <li class="row note-row" data-list-row>
+        </li>        <li class="row note-row" data-list-row data-id="n3" data-tag="personal">
           <div class="row-body">
             <span class="label">Compras</span>
             <span class="row-meta mut">Cuaderno A4, cargador, café.</span>
@@ -74,28 +74,28 @@
         </ul>
         <p class="group-hd k">septiembre</p>
         <ul class="rows">
-        <li class="row note-row" data-list-row>
+        <li class="row note-row" data-list-row data-id="n4" data-tag="facultad">
           <div class="row-body">
             <span class="label">Consultas para la cátedra de BD</span>
             <span class="row-meta mut">¿El diagrama ER va con notación Chen o crow’s foot?</span>
           </div>
           <span class="tag tag-accent">facultad</span>
           <span class="row-due mut num">13/09</span>
-        </li>        <li class="row note-row" data-list-row>
+        </li>        <li class="row note-row" data-list-row data-id="n5" data-tag="diario">
           <div class="row-body">
             <span class="label">Diario — semana difícil</span>
             <span class="row-meta mut">Dormí poco tres días. Bajar la carga del viernes.</span>
           </div>
           <span class="tag tag-outline">diario</span>
           <span class="row-due mut num">13/09</span>
-        </li>        <li class="row note-row" data-list-row>
+        </li>        <li class="row note-row" data-list-row data-id="n6" data-tag="lectura">
           <div class="row-body">
             <span class="label">Tanenbaum, cap. 2 — subrayados</span>
             <span class="row-meta mut">“Un proceso es un programa en ejecución”, más el modelo de cinco estados.</span>
           </div>
           <span class="tag tag-outline">lectura</span>
           <span class="row-due mut num">10/09</span>
-        </li>        <li class="row note-row" data-list-row>
+        </li>        <li class="row note-row" data-list-row data-id="n7" data-tag="facultad">
           <div class="row-body">
             <span class="label">Inglés — vocabulario técnico</span>
             <span class="row-meta mut">deadlock, throughput, overhead, bottleneck.</span>
@@ -104,28 +104,30 @@
           <span class="row-due mut num">09/09</span>
         </li>
         </ul>
+        <p class="group-hd k" data-group="extra" hidden>otras</p>
+        <ul class="rows" data-notes-extra hidden></ul>
       </div>
 
       <aside class="split-detail">
         <div class="detail-hd">
-          <p class="k">editando · guardado 13:41</p>
+          <p class="k" data-note-status>editando · guardado 13:41</p>
           <div class="detail-actions">
-            <button class="btn btn-ghost btn-icon" aria-label="Fijar">⚑</button>
-            <button class="btn btn-ghost btn-icon" aria-label="Duplicar">⧉</button>
-            <button class="btn btn-ghost btn-icon" aria-label="Eliminar">✕</button>
+            <button class="btn btn-ghost btn-icon" aria-label="Fijar" data-pin-note>⚑</button>
+            <button class="btn btn-ghost btn-icon" aria-label="Duplicar" data-duplicate-detail>⧉</button>
+            <button class="btn btn-ghost btn-icon" aria-label="Eliminar" data-delete-detail>✕</button>
           </div>
         </div>
-        <input class="input note-title" value="Resumen SO — capítulo 4" aria-label="Título de la nota">
+        <input class="input note-title" id="n-title" value="Resumen SO — capítulo 4" aria-label="Título de la nota">
         <div class="editor-bar">
-          <button class="btn btn-ghost btn-icon" aria-label="Negrita"><strong>B</strong></button>
-          <button class="btn btn-ghost btn-icon" aria-label="Itálica"><em>I</em></button>
-          <button class="btn btn-ghost btn-icon" aria-label="Título">H2</button>
-          <button class="btn btn-ghost btn-icon" aria-label="Lista">≡</button>
-          <button class="btn btn-ghost btn-icon" aria-label="Checklist">☑</button>
-          <button class="btn btn-ghost btn-icon" aria-label="Código">&lt;/&gt;</button>
+          <button class="btn btn-ghost btn-icon" aria-label="Negrita" data-md="bold"><strong>B</strong></button>
+          <button class="btn btn-ghost btn-icon" aria-label="Itálica" data-md="italic"><em>I</em></button>
+          <button class="btn btn-ghost btn-icon" aria-label="Título" data-md="h2">H2</button>
+          <button class="btn btn-ghost btn-icon" aria-label="Lista" data-md="list">≡</button>
+          <button class="btn btn-ghost btn-icon" aria-label="Checklist" data-md="checklist">☑</button>
+          <button class="btn btn-ghost btn-icon" aria-label="Código" data-md="code">&lt;/&gt;</button>
           <span class="mut" style="font-size:11.5px;margin-left:auto">markdown activo</span>
         </div>
-        <textarea class="input note-body" rows="14" aria-label="Contenido de la nota">## Planificación de procesos
+        <textarea class="input note-body" id="n-body" rows="14" aria-label="Contenido de la nota">## Planificación de procesos
 
 **FCFS** — simple, sin inanición, mal tiempo de respuesta con procesos largos adelante.
 **SJF** — óptimo en tiempo medio de espera, necesita estimar la duración.
@@ -139,16 +141,16 @@
 Preguntar en clase: ¿cómo se mide el overhead del cambio de contexto en la práctica?</textarea>
         <div class="field">
           <label>Etiquetas</label>
-          <div class="chips">
+          <div class="chips" id="n-tags">
             <button class="tag tag-accent" aria-pressed="true">facultad</button>
             <button class="tag tag-accent" aria-pressed="true">SO</button>
             <button class="tag tag-outline" aria-pressed="false">lectura</button>
-            <button class="tag tag-outline" aria-pressed="false">+ etiqueta</button>
+            <button class="tag tag-outline" aria-pressed="false" data-add-tag>+ etiqueta</button>
           </div>
         </div>
         <div class="field-row">
-          <div class="field"><label>Vinculada a</label><span class="linked">Sist. Operativos · miércoles 10:00</span></div>
-          <div class="field"><label>Convertir</label><button class="btn btn-secondary btn-block">→ Crear tarea</button></div>
+          <div class="field"><label>Vinculada a</label><span class="linked" data-note-linked>Sist. Operativos · miércoles 10:00</span></div>
+          <div class="field"><label>Convertir</label><button class="btn btn-secondary btn-block" data-note-to-task>→ Crear tarea</button></div>
         </div>
         <details class="config">
           <summary>Configuración de notas</summary>

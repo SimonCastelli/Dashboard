@@ -32,50 +32,50 @@
     <div class="page-hd">
       <div class="page-hd-row">
         <div><p class="k">objetivos · 2º cuatrimestre 2026</p><h1>Objetivos</h1></div>
-        <div class="page-hd-actions"><button class="btn btn-secondary">Cerrar cuatrimestre</button><button class="btn btn-primary blueprint">+ Nuevo objetivo<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button></div>
+        <div class="page-hd-actions"><button class="btn btn-secondary" data-close-quarter>Cerrar cuatrimestre</button><button class="btn btn-primary blueprint" data-new-goal>+ Nuevo objetivo<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button></div>
       </div>
       <div class="tools">
         <div class="seg">
-          <label class="seg-opt"><input type="radio" name="g-range" checked>Cuatrimestre</label>
-          <label class="seg-opt"><input type="radio" name="g-range">Año</label>
-          <label class="seg-opt"><input type="radio" name="g-range">Cerrados</label>
+          <label class="seg-opt"><input type="radio" name="g-range" value="cuatrimestre" checked>Cuatrimestre</label>
+          <label class="seg-opt"><input type="radio" name="g-range" value="año">Año</label>
+          <label class="seg-opt"><input type="radio" name="g-range" value="cerrados">Cerrados</label>
         </div>
-        <span class="mut" style="font-size:12px">quedan 14 semanas · avance medio 57%</span>
+        <span class="mut" style="font-size:12px" data-goals-summary>quedan 14 semanas · avance medio 57%</span>
       </div>
     </div>
     <div class="split">
       <div class="split-list">
         <p class="group-hd k">en curso</p>
         <ul class="rows">
-        <li class="row goal-row is-active" data-list-row>
+        <li class="row goal-row is-active" data-list-row data-id="g1" data-status="curso">
           <div class="row-body">
             <div class="goal-hd"><span class="label">Aprobar 4 materias</span><span class="mut num">2 / 4</span></div>
             <div class="bar"><span style="width:50%"></span></div>
             <span class="row-meta mut">2 aprobadas · Álgebra II y BD rinden en diciembre</span>
           </div>
           <span class="tag tag-accent">facultad</span>
-        </li>        <li class="row goal-row" data-list-row>
+        </li>        <li class="row goal-row" data-list-row data-id="g2" data-status="curso">
           <div class="row-body">
             <div class="goal-hd"><span class="label">Leer 12 libros</span><span class="mut num">7 / 12</span></div>
             <div class="bar"><span style="width:58%"></span></div>
             <span class="row-meta mut">7 terminados · vas 1 libro adelantada</span>
           </div>
           <span class="tag tag-outline">personal</span>
-        </li>        <li class="row goal-row" data-list-row>
+        </li>        <li class="row goal-row" data-list-row data-id="g3" data-status="curso">
           <div class="row-body">
             <div class="goal-hd"><span class="label">Correr 300 km</span><span class="mut num">186 / 300</span></div>
             <div class="bar"><span style="width:62%"></span></div>
             <span class="row-meta mut">186 km · 8,2 km por semana necesarios</span>
           </div>
           <span class="tag tag-neutral">salud</span>
-        </li>        <li class="row goal-row" data-list-row>
+        </li>        <li class="row goal-row" data-list-row data-id="g4" data-status="curso">
           <div class="row-body">
             <div class="goal-hd"><span class="label">Ahorrar $480.000</span><span class="mut num">$295k / $480k</span></div>
             <div class="bar"><span style="width:61%"></span></div>
             <span class="row-meta mut">$295.000 · $13.000 por semana</span>
           </div>
           <span class="tag tag-outline">finanzas</span>
-        </li>        <li class="row goal-row" data-list-row>
+        </li>        <li class="row goal-row" data-list-row data-id="g5" data-status="curso">
           <div class="row-body">
             <div class="goal-hd"><span class="label">Inglés B2</span><span class="mut num">24 / 40</span></div>
             <div class="bar"><span style="width:60%"></span></div>
@@ -86,7 +86,7 @@
         </ul>
         <p class="group-hd k">en riesgo</p>
         <ul class="rows">
-        <li class="row goal-row" data-list-row>
+        <li class="row goal-row" data-list-row data-id="g6" data-status="riesgo">
           <div class="row-body">
             <div class="goal-hd"><span class="label">Meditar 100 días</span><span class="mut num">38 / 100</span></div>
             <div class="bar"><span style="width:38%"></span></div>
@@ -95,14 +95,16 @@
           <span class="tag tag-neutral">salud</span>
         </li>
         </ul>
+        <p class="group-hd k" data-group="cerrados" hidden>cerrados</p>
+        <ul class="rows" data-goals-closed hidden></ul>
       </div>
 
       <aside class="split-detail">
         <div class="detail-hd">
           <p class="k">editar objetivo</p>
           <div class="detail-actions">
-            <button class="btn btn-ghost btn-icon" aria-label="Archivar">▾</button>
-            <button class="btn btn-ghost btn-icon" aria-label="Eliminar">✕</button>
+            <button class="btn btn-ghost btn-icon" aria-label="Archivar" data-archive-goal>▾</button>
+            <button class="btn btn-ghost btn-icon" aria-label="Eliminar" data-delete-detail>✕</button>
           </div>
         </div>
         <div class="field"><label for="g-name">Objetivo</label><input class="input" id="g-name" value="Aprobar 4 materias"></div>
@@ -117,17 +119,12 @@
         </div>
         <div class="field">
           <label>Cómo se mide</label>
-          <div class="seg"><label class="seg-opt"><input type="radio" name="g-type" checked>Cantidad</label><label class="seg-opt"><input type="radio" name="g-type">Porcentaje</label><label class="seg-opt"><input type="radio" name="g-type">Hito</label></div>
+          <div class="seg" id="g-measure"><label class="seg-opt"><input type="radio" name="g-type" value="Cantidad" checked>Cantidad</label><label class="seg-opt"><input type="radio" name="g-type" value="Porcentaje">Porcentaje</label><label class="seg-opt"><input type="radio" name="g-type" value="Hito">Hito</label></div>
         </div>
         <div class="field">
-          <label>Hitos · 2 de 4</label>
-          <ul class="rows compact">
-            <li class="row"><button class="check" aria-pressed="true" aria-label="Completar"></button><span class="label done">Inglés Técnico — aprobada 05/09</span></li>
-            <li class="row"><button class="check" aria-pressed="true" aria-label="Completar"></button><span class="label done">Álgebra II — parcial 1 aprobado</span></li>
-            <li class="row"><button class="check" aria-pressed="false" aria-label="Completar"></button><span class="label">Bases de Datos — final 12/12</span></li>
-            <li class="row"><button class="check" aria-pressed="false" aria-label="Completar"></button><span class="label">Sist. Operativos — final 19/12</span></li>
-          </ul>
-          <input class="input" placeholder="+ Agregar hito">
+          <label for="g-mile-add">Hitos · <span data-mile-count>2 de 4</span></label>
+          <ul class="rows compact" id="g-milestones"></ul>
+          <input class="input" id="g-mile-add" placeholder="+ Agregar hito (Enter)">
         </div>
         <div class="field">
           <label>Alimentado por</label>
@@ -138,8 +135,8 @@
           </div>
         </div>
         <div class="stats two">
-          <div class="stat"><p class="k">avance</p><strong>50%</strong><div class="bar"><span style="width:50%"></span></div></div>
-          <div class="stat"><p class="k">ritmo</p><strong>En fecha</strong><span class="mut" style="font-size:12px">2 finales en 14 semanas</span></div>
+          <div class="stat"><p class="k">avance</p><strong data-goal-pct>50%</strong><div class="bar"><span data-goal-bar style="width:50%"></span></div></div>
+          <div class="stat"><p class="k">ritmo</p><strong data-goal-pace>En fecha</strong><span class="mut" style="font-size:12px" data-goal-pace-note>2 finales en 14 semanas</span></div>
         </div>
         <details class="config">
           <summary>Configuración de objetivos</summary>
@@ -156,8 +153,8 @@
           </div>
         </details>
         <div class="detail-foot">
-          <button class="btn btn-secondary">Descartar</button>
-          <button class="btn btn-primary">Guardar cambios</button>
+          <button class="btn btn-secondary" data-discard-detail>Descartar</button>
+          <button class="btn btn-primary" data-save-detail>Guardar cambios</button>
         </div>
       </aside>
     </div>
