@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notas · Panel</title>
+<link rel="stylesheet" href="assets/industry.css">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <span class="nav-brand">PANEL · SIMÓN</span>
+    <nav class="side-nav">
+      <a href="index.html">Hoy</a>
+      <a href="facultad.html">Facultad</a>
+      <a href="bandeja.html">Bandeja <span class="count" data-badge="unread">17</span></a>
+      <a href="tareas.html">Tareas <span class="count" data-badge="tasks-open">5</span></a>
+      <a href="notas.html" aria-current="page">Notas</a>
+      <a href="habitos.html">Hábitos</a>
+      <a href="objetivos.html">Objetivos</a>
+    </nav>
+    <div class="side-foot">
+      <p class="k">cuentas</p>
+      <span class="acc"><i class="acc-1"></i>castellisimon2@gmail.com</span>
+      <span class="acc"><i class="acc-2"></i>scastelli@fie.undef.edu.ar</span>
+      <span class="acc"><i class="acc-3"></i>castellisimon1@gmail.com</span>
+      <span class="acc"><i class="acc-4"></i>castellisimon3@gmail.com</span>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-hd">
+      <p class="k">notas recientes</p>
+      <h1>Notas</h1>
+    </div>
+    <div class="pad">
+      <div class="center-col">
+        <div data-notes-list>
+          <div class="li">Ideas TP final</div>
+          <div class="li">Resumen SO cap. 4</div>
+          <div class="li">Compras</div>
+        </div>
+        <button class="btn btn-secondary btn-block" data-open-capture="Nota">+ Nueva nota</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<nav class="tabbar">
+  <a href="index.html">Hoy</a>
+  <a href="facultad.html">Facultad</a>
+  <a href="bandeja.html">Bandeja</a>
+  <a href="notas.html" aria-current="page">Notas</a>
+</nav>
+<button class="btn btn-primary blueprint fab" data-open-capture="Nota" aria-label="Capturar">+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button>
+
+<div class="dialog-backdrop" id="capture" hidden>
+  <div class="dialog blueprint" role="dialog" aria-label="Captura rápida">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <h2 class="dialog-title">Captura rápida</h2>
+    <input class="input" data-capture-input placeholder="Ej.: TP2 de BD jueves 18h">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <label class="radio"><input type="radio" name="kind" checked><span class="dot"></span>Tarea</label>
+      <label class="radio"><input type="radio" name="kind"><span class="dot"></span>Nota</label>
+      <label class="radio"><input type="radio" name="kind"><span class="dot"></span>Evento</label>
+    </div>
+    <p class="capture-hint mut" data-capture-hint>escribí fecha y hora y las detecto</p>
+    <div class="dialog-actions">
+      <button class="btn btn-secondary" data-close-capture>Cancelar</button>
+      <button class="btn btn-primary" data-save-capture>Guardar</button>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chrono-node/1.0.9/chrono.min.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

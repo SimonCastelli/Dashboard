@@ -15,10 +15,10 @@
       <a href="index.html" aria-current="page">Hoy</a>
       <a href="facultad.html">Facultad</a>
       <a href="bandeja.html">Bandeja <span class="count" data-badge="unread">17</span></a>
-      <a href="index.html#tareas">Tareas <span class="count" data-badge="tasks-open">5</span></a>
-      <a href="index.html#notas">Notas</a>
-      <a href="index.html#habitos">Hábitos</a>
-      <a href="index.html#objetivos">Objetivos</a>
+      <a href="tareas.html">Tareas <span class="count" data-badge="tasks-open">5</span></a>
+      <a href="notas.html">Notas</a>
+      <a href="habitos.html">Hábitos</a>
+      <a href="objetivos.html">Objetivos</a>
     </nav>
     <div class="side-foot">
       <p class="k">cuentas</p>
@@ -132,7 +132,7 @@
       </section>
 
       <section class="cell w2" id="tareas">
-        <div class="cell-hd"><p class="k">tareas · <span data-badge="tasks-open">5</span> abiertas</p><span class="mut" style="font-size:11px">por vencimiento</span></div>
+        <div class="cell-hd"><p class="k">tareas · <span data-badge="tasks-open">5</span> abiertas</p><a href="tareas.html" style="font-size:11px">ver todo</a></div>
         <table class="table"><tbody data-tasks-body>
           <tr data-id="t1"><td style="width:22px"><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Terminar TP2 de BD</td><td><span class="tag tag-accent">facultad</span></td><td class="mut" style="text-align:right">hoy</td></tr>
           <tr data-id="t2"><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Enviar presupuesto a Martín</td><td><span class="tag tag-neutral">freelance</span></td><td class="mut" style="text-align:right">mañana</td></tr>
@@ -144,18 +144,21 @@
       </section>
 
       <section class="cell" id="habitos">
-        <p class="k">hábitos · 14 días</p>
+        <div class="cell-hd"><p class="k">hábitos · 14 días</p><a href="habitos.html" style="font-size:11px">ver todo</a></div>
         <div><div style="font-size:12.5px;margin-bottom:5px">Correr</div><div class="dots" data-habit="correr"><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i></div></div>
         <div><div style="font-size:12.5px;margin-bottom:5px">Leer 30 min</div><div class="dots" data-habit="leer"><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i></div></div>
         <div><div style="font-size:12.5px;margin-bottom:5px">Meditar</div><div class="dots" data-habit="meditar"><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div></div>
       </section>
 
       <section class="cell" id="objetivos">
-        <p class="k">objetivos del cuatrimestre</p>
+        <div class="cell-hd"><p class="k">objetivos del cuatrimestre</p><a href="objetivos.html" style="font-size:11px">ver todo</a></div>
         <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span>Aprobar 4 materias</span><span class="mut">2/4</span></div><div class="bar"><span style="width:50%"></span></div></div>
         <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span>Leer 12 libros</span><span class="mut">7/12</span></div><div class="bar"><span style="width:58%"></span></div></div>
         <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span>Correr 300 km</span><span class="mut">186/300</span></div><div class="bar"><span style="width:62%"></span></div></div>
-        <div id="notas"><p class="k">notas recientes</p><p class="mut" style="font-size:12.5px;margin:6px 0 0" data-notes-text data-notes-base="Ideas TP final · Resumen SO cap. 4 · Compras">Ideas TP final · Resumen SO cap. 4 · Compras</p></div>
+        <div id="notas">
+          <div class="cell-hd"><p class="k">notas recientes</p><a href="notas.html" style="font-size:11px">ver todo</a></div>
+          <p class="mut" style="font-size:12.5px;margin:6px 0 0" data-notes-text>Ideas TP final · Resumen SO cap. 4 · Compras</p>
+        </div>
       </section>
     </div>
   </main>
@@ -165,7 +168,7 @@
   <a href="index.html" aria-current="page">Hoy</a>
   <a href="facultad.html">Facultad</a>
   <a href="bandeja.html">Bandeja</a>
-  <a href="index.html#notas">Notas</a>
+  <a href="notas.html">Notas</a>
 </nav>
 <button class="btn btn-primary blueprint fab" data-open-capture aria-label="Capturar">+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button>
 

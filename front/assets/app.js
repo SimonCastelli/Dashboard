@@ -149,12 +149,24 @@ function setHabitDay(habit, day, on) {
 }
 
 // ── notas ──
+// BASE_NOTES son las de muestra (antes vivían como texto plano en el HTML);
+// notas.html las lista una por una, la vista compacta de "Hoy" las junta en
+// una sola línea — ambas leen de la misma fuente.
+const BASE_NOTES = ['Ideas TP final', 'Resumen SO cap. 4', 'Compras'];
+function getAllNotes() { return BASE_NOTES.concat(load(STORE.extraNotes, [])); }
 function renderNotes() {
   const p = document.querySelector('[data-notes-text]');
-  if (!p) return;
-  const base = p.dataset.notesBase || p.textContent;
-  const extra = load(STORE.extraNotes, []);
-  p.textContent = extra.length ? base + ' · ' + extra.join(' · ') : base;
+  if (p) p.textContent = getAllNotes().join(' · ');
+  const list = document.querySelector('[data-notes-list]');
+  if (list) {
+    list.innerHTML = '';
+    getAllNotes().forEach((text) => {
+      const row = document.createElement('div');
+      row.className = 'li';
+      row.textContent = text;
+      list.appendChild(row);
+    });
+  }
 }
 function addNote(text) {
   const extra = load(STORE.extraNotes, []);
@@ -278,8 +290,14 @@ function saveCapture(sourceInput) {
 
 // ── diálogo de captura ──
 const dialog = document.getElementById('capture');
-function openCapture() {
+function openCapture(kind) {
   if (!dialog) return;
+  if (kind) {
+    dialog.querySelectorAll('[name="kind"]').forEach((r) => {
+      const label = r.closest('label.radio');
+      r.checked = !!(label && label.textContent.trim() === kind);
+    });
+  }
   dialog.hidden = false;
   dialog.querySelector('.input').focus();
 }
@@ -315,7 +333,8 @@ document.addEventListener('click', (e) => {
     if (habit) setHabitDay(habit, day, on);
     return;
   }
-  if (e.target.closest('[data-open-capture]')) { openCapture(); return; }
+  const openBtn = e.target.closest('[data-open-capture]');
+  if (openBtn) { openCapture(openBtn.getAttribute('data-open-capture') || undefined); return; }
   if (e.target.closest('[data-save-capture]')) { saveCapture(); return; }
   if (e.target.closest('[data-close-capture]')) { closeCapture(); return; }
   const toTask = e.target.closest('[data-to-task]');
@@ -373,25 +392,6 @@ document.querySelectorAll('[name="range"]').forEach((input) => {
     const sub = document.querySelector('[data-range-sub]');
     if (title) title.textContent = label.title;
     if (sub) sub.textContent = label.sub;
-  });
-});
-
-// Enlaces del sidebar a secciones dentro de "Hoy" (Tareas/Notas/Hábitos/
-// Objetivos): si ya estamos en index.html, en vez de un salto de ancla mudo
-// (que no se nota si la sección ya está a la vista) hacemos scroll suave y
-// resaltamos el destino, para que quede claro que el click hizo algo.
-document.querySelectorAll('.side-nav a[href*="#"]').forEach((link) => {
-  link.addEventListener('click', (e) => {
-    const url = new URL(link.href);
-    if (url.pathname !== location.pathname) return; // navega normal a otra página
-    const target = document.getElementById(url.hash.slice(1));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    history.replaceState(null, '', url.hash);
-    target.classList.remove('jump-flash');
-    void target.offsetWidth; // fuerza reflow para poder re-disparar la animación
-    target.classList.add('jump-flash');
   });
 });
 
