@@ -87,13 +87,17 @@ function buildTaskRow(t) {
   return tr;
 }
 function renderTasksTable() {
+  // Hidrata el estado "hecho" de cualquier fila de muestra, sea la tabla del
+  // dashboard (tr[data-id]) o una fila de tareas.html (li[data-list-row][data-id]).
+  const overrides = getTaskDoneOverrides();
+  document.querySelectorAll('tr[data-id], [data-list-row][data-id]').forEach((row) => {
+    const sample = SAMPLE_TASKS.find((t) => t.id === row.dataset.id);
+    if (sample) applyRowDoneState(row, overrides[sample.id] ?? sample.doneDefault);
+  });
+  // Las tareas capturadas se agregan solo a la tabla simple del dashboard —
+  // la lista con metadatos de tareas.html no tiene dónde encajarlas.
   const body = document.querySelector('[data-tasks-body]');
   if (!body) return;
-  const overrides = getTaskDoneOverrides();
-  SAMPLE_TASKS.forEach((t) => {
-    const row = body.querySelector(`tr[data-id="${t.id}"]`);
-    if (row) applyRowDoneState(row, overrides[t.id] ?? t.doneDefault);
-  });
   body.querySelectorAll('tr[data-extra="1"]').forEach((r) => r.remove());
   getExtraTasks().forEach((t) => body.appendChild(buildTaskRow(t)));
 }
@@ -318,7 +322,7 @@ document.addEventListener('click', (e) => {
   if (check) {
     const on = check.getAttribute('aria-pressed') === 'true';
     const next = !on;
-    const row = check.closest('tr');
+    const row = check.closest('tr, [data-list-row]');
     applyRowDoneState(row || check.parentElement, next);
     if (row && row.dataset.id) setTaskDone(row.dataset.id, next);
     updateBadges();
@@ -422,6 +426,24 @@ document.querySelectorAll('[data-capture-input]').forEach((input) => {
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') { e.preventDefault(); saveCapture(input); }
   });
+});
+
+// Selección de fila en las pantallas de gestión (tareas, notas, hábitos, objetivos)
+document.addEventListener('click', (e) => {
+  const row = e.target.closest('[data-list-row]');
+  if (!row || e.target.closest('.check') || e.target.closest('.btn')) return;
+  row.closest('.split-list').querySelectorAll('[data-list-row]').forEach((r) => r.classList.remove('is-active'));
+  row.classList.add('is-active');
+});
+
+// Chips de selección múltiple (etiquetas, días, "alimentado por", etc.)
+document.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chips .tag');
+  if (!chip) return;
+  const on = chip.getAttribute('aria-pressed') === 'true';
+  chip.setAttribute('aria-pressed', String(!on));
+  chip.classList.toggle('tag-accent', !on);
+  chip.classList.toggle('tag-outline', on);
 });
 
 // ── hidratar la página con lo persistido ──

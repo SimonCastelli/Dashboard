@@ -113,11 +113,6 @@ a{text-decoration:none}
    leerse por encima del dashboard en vez de mezclarse con lo de atrás. */
 .dialog{background:var(--color-bg)}
 .capture-hint{font-size:12px}
-
-/* ── páginas dedicadas (tareas/notas/hábitos/objetivos): columna centrada,
-   más angosta que el resto (que usan .pad a lo ancho) porque su contenido
-   es una lista simple, no una grilla. ── */
-.center-col{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-4)}
 .tabbar{display:none}
 .fab{display:none}
 
@@ -143,4 +138,58 @@ a{text-decoration:none}
   .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;font:600 9px/1 var(--font-heading);letter-spacing:.1em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 50%,transparent)}
   .tabbar a[aria-current="page"]{color:var(--color-accent)}
   .fab{display:inline-flex;position:fixed;right:16px;bottom:88px;width:54px;height:54px;font-size:24px;padding:0;z-index:6}
+  .split-list{padding:var(--space-4)}
+  .split-detail{padding:var(--space-4)}
+  .field-row,.stats.two{grid-template-columns:1fr}
+  .dots.wide{grid-template-columns:repeat(15,1fr)}
+  .month-dots{grid-template-columns:repeat(10,1fr)}
+  .page-hd-actions{width:100%}
+  .page-hd-actions .btn{flex:1}
 }
+
+/* ── pantallas de gestión: tareas, notas, hábitos, objetivos ── */
+.page-hd-row{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap}
+.page-hd-actions{display:flex;gap:8px;flex-wrap:wrap}
+.tools{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-3)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 400px}
+.split-list{padding:var(--space-6);min-width:0}
+.split-detail{border-left:1px solid var(--line);padding:var(--space-6);display:flex;flex-direction:column;gap:var(--space-4);min-width:0}
+.group-hd{margin:var(--space-6) 0 var(--space-2)}
+.group-hd:first-child{margin-top:0}
+.rows{list-style:none;margin:0;padding:0}
+.rows .row{display:flex;align-items:flex-start;gap:12px;padding:11px 12px;border:1px solid var(--line);border-bottom:0}
+.rows .row:last-child{border-bottom:1px solid var(--line)}
+.rows .row.is-active{border-color:var(--color-accent);background:color-mix(in srgb,var(--color-accent) 8%, transparent);position:relative;z-index:1}
+.rows .row.is-done .label,.rows .row.is-paused .label{color:color-mix(in srgb,var(--color-text) 50%,transparent)}
+.rows.compact .row{padding:7px 0;border:0;border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%,transparent)}
+.rows.compact .row:last-child{border-bottom:0}
+.row-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.row-body .label{font-size:14px}
+.row-meta{font-size:11.5px}
+.row-due{font-size:12px;white-space:nowrap;padding-top:2px}
+.dots.wide{grid-template-columns:repeat(30,1fr);margin-top:3px}
+.dots.wide i{height:7px}
+.month-dots{grid-template-columns:repeat(15,1fr)}
+.month-dots i{height:14px}
+.goal-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:14px}
+.goal-row .bar{margin:2px 0}
+
+.detail-hd{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.detail-actions{display:flex;gap:4px}
+.detail-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:auto;padding-top:var(--space-3);border-top:1px solid var(--line)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}
+textarea.input{resize:vertical;font-family:var(--font-body);line-height:1.55}
+.note-title{font-family:var(--font-heading);font-size:24px}
+.note-body{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+.editor-bar{display:flex;align-items:center;gap:2px;border:1px solid var(--line);padding:4px 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips .tag{cursor:pointer;font-family:inherit}
+.chips .tag[aria-pressed="false"]:hover{border-color:var(--color-accent);color:var(--color-accent-700)}
+.linked{font-size:13px;border:1px solid var(--line);padding:8px 10px;display:block}
+.stats.two{grid-template-columns:1fr 1fr;margin-top:0}
+.config{border:1px solid var(--line)}
+.config summary{padding:10px 12px;cursor:pointer;font:600 10px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent)}
+.config summary:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.config-body{padding:0 12px 12px;display:flex;flex-direction:column;gap:var(--space-3);border-top:1px solid var(--line);padding-top:12px}
+
+@media (max-width: 1100px){ .split{grid-template-columns:1fr} .split-detail{border-left:0;border-top:1px solid var(--line)} }
