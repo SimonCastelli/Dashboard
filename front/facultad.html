@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facultad · Panel</title>
+<link rel="stylesheet" href="assets/industry.css">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <span class="nav-brand">PANEL · ANA</span>
+    <nav class="side-nav">
+      <a href="index.html">Hoy</a>
+      <a href="facultad.html" aria-current="page">Facultad</a>
+      <a href="bandeja.html">Bandeja <span class="count">17</span></a>
+      <a href="index.html#tareas">Tareas <span class="count">5</span></a>
+      <a href="index.html#notas">Notas</a>
+      <a href="index.html#habitos">Hábitos</a>
+      <a href="index.html#objetivos">Objetivos</a>
+    </nav>
+    <div class="side-foot">
+      <p class="k">cuentas</p>
+      <span class="acc"><i class="acc-1"></i>ana@gmail.com</span>
+      <span class="acc"><i class="acc-2"></i>ana.facultad@gmail.com</span>
+      <span class="acc"><i class="acc-3"></i>ana.freelance@gmail.com</span>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-hd">
+      <p class="k">facultad · 2º cuatrimestre</p>
+      <h1>Horario de cursada</h1>
+      <div class="seg">
+        <label class="seg-opt"><input type="radio" name="schedule-view" value="week" checked>Semana</label>
+        <label class="seg-opt"><input type="radio" name="schedule-view" value="day">Por día</label>
+      </div>
+    </div>
+    <div class="pad">
+      <div class="week">
+        <div></div>
+        <div class="hd k">lun</div><div class="hd k">mar</div><div class="hd k">mié</div><div class="hd k">jue</div><div class="hd k">vie</div>
+
+        <div class="hr-lbl mut">08</div>
+        <div class="slot"><div class="class-box"><strong>Álgebra II</strong>teórico · 204</div></div>
+        <div class="slot"><div class="class-box"><strong>Álgebra II</strong>teórico · 204</div></div>
+        <div class="slot"></div><div class="slot"></div>
+        <div class="slot"><div class="class-box"><strong>Álgebra II</strong>práctica · 208</div></div>
+
+        <div class="hr-lbl mut">10</div>
+        <div class="slot"></div><div class="slot"></div>
+        <div class="slot"><div class="class-box"><strong>Sist. Operativos</strong>teórico · A-112</div></div>
+        <div class="slot"></div>
+        <div class="slot"><div class="class-box"><strong>Sist. Operativos</strong>lab · L-1</div></div>
+
+        <div class="hr-lbl mut">15</div>
+        <div class="slot"></div>
+        <div class="slot"><div class="class-box" style="border-width:2px"><strong>Bases de Datos</strong>práctica · Lab 3</div></div>
+        <div class="slot"></div>
+        <div class="slot"><div class="class-box"><strong>Bases de Datos</strong>teórico · 301</div></div>
+        <div class="slot"></div>
+
+        <div class="hr-lbl mut">18</div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div class="slot"><div class="class-box"><strong>Inglés Técnico</strong>B-05</div></div>
+        <div class="slot"></div>
+      </div>
+
+      <div class="sched" style="display:none">
+        <div class="ev" style="padding:10px 12px"><strong>Entrega TP2 — Bases de Datos</strong><br>jueves 16/09 · faltan 2 días</div>
+        <div class="day-hd"><p class="k">lunes</p><span></span></div>
+        <div class="day-row"><div class="slot-card">
+          <div class="time num">08:00<span class="mut" style="font-size:12px"> 09:30</span></div>
+          <div style="font-size:13.5px;margin-top:5px"><strong>Álgebra II</strong></div>
+          <div class="room mut">teórico · Aula 204</div>
+        </div><div></div></div>
+        <div class="day-hd"><p class="k">martes · hoy</p><span></span></div>
+        <div class="day-row"><div class="slot-card">
+          <div class="time num">08:00<span class="mut" style="font-size:12px"> 09:30</span></div>
+          <div style="font-size:13.5px;margin-top:5px"><strong>Álgebra II</strong></div>
+          <div class="room mut">teórico · Aula 204</div>
+        </div><div class="slot-card is-now">
+          <div class="time num">15:00<span class="mut" style="font-size:12px"> 17:00</span></div>
+          <div style="font-size:13.5px;margin-top:5px"><strong>Bases de Datos</strong></div>
+          <div class="room mut">práctica · Lab 3</div>
+        </div></div>
+        <div class="day-hd"><p class="k">miércoles</p><span></span></div>
+        <div class="day-row"><div class="slot-card">
+          <div class="time num">10:00<span class="mut" style="font-size:12px"> 12:00</span></div>
+          <div style="font-size:13.5px;margin-top:5px"><strong>Sist. Operativos</strong></div>
+          <div class="room mut">teórico · A-112</div>
+        </div><div></div></div>
+        <div class="day-hd"><p class="k">jueves</p><span></span></div>
+        <div class="day-row"><div class="slot-card">
+          <div class="time num">15:00<span class="mut" style="font-size:12px"> 17:00</span></div>
+          <div style="font-size:13.5px;margin-top:5px"><strong>Bases de Datos</strong></div>
+          <div class="room mut">teórico · Aula 301</div>
+        </div><div class="slot-card">
+          <div class="time num">18:00<span class="mut" style="font-size:12px"> 20:00</span></div>
+          <div style="font-size:13.5px;margin-top:5px"><strong>Inglés Técnico</strong></div>
+          <div class="room mut">Aula B-05</div>
+        </div></div>
+        <div class="day-hd"><p class="k">viernes</p><span></span></div>
+        <div class="day-row"><div class="slot-card">
+          <div class="time num">08:00<span class="mut" style="font-size:12px"> 09:30</span></div>
+          <div style="font-size:13.5px;margin-top:5px"><strong>Álgebra II</strong></div>
+          <div class="room mut">práctica · Aula 208</div>
+        </div><div class="slot-card">
+          <div class="time num">10:00<span class="mut" style="font-size:12px"> 12:00</span></div>
+          <div style="font-size:13.5px;margin-top:5px"><strong>Sist. Operativos</strong></div>
+          <div class="room mut">lab · L-1</div>
+        </div></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><p class="k">asistencia</p><strong>86%</strong><div class="bar"><span style="width:86%"></span></div></div>
+        <div class="stat"><p class="k">materias</p><strong>4 cursando</strong><span class="mut" style="font-size:12px">Álgebra II · BD · SO · Inglés</span></div>
+        <div class="stat"><p class="k">próxima entrega</p><strong>TP2 — BD</strong><span class="mut" style="font-size:12px">jueves 16/09</span></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<nav class="tabbar">
+  <a href="index.html">Hoy</a>
+  <a href="facultad.html" aria-current="page">Facultad</a>
+  <a href="bandeja.html">Bandeja</a>
+  <a href="index.html#notas">Notas</a>
+</nav>
+<button class="btn btn-primary blueprint fab" data-open-capture aria-label="Capturar">+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button>
+
+<div class="dialog-backdrop" id="capture" hidden>
+  <div class="dialog blueprint" role="dialog" aria-label="Captura rápida">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <h2 class="dialog-title">Captura rápida</h2>
+    <input class="input" data-capture-input placeholder="Ej.: TP2 de BD jueves 18h">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <label class="radio"><input type="radio" name="kind" checked><span class="dot"></span>Tarea</label>
+      <label class="radio"><input type="radio" name="kind"><span class="dot"></span>Nota</label>
+      <label class="radio"><input type="radio" name="kind"><span class="dot"></span>Evento</label>
+    </div>
+    <p class="capture-hint mut" data-capture-hint>escribí fecha y hora y las detecto</p>
+    <div class="dialog-actions">
+      <button class="btn btn-secondary" data-close-capture>Cancelar</button>
+      <button class="btn btn-primary" data-close-capture>Guardar</button>
+    </div>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

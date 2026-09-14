@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bandeja · Panel</title>
+<link rel="stylesheet" href="assets/industry.css">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <span class="nav-brand">PANEL · ANA</span>
+    <nav class="side-nav">
+      <a href="index.html">Hoy</a>
+      <a href="facultad.html">Facultad</a>
+      <a href="bandeja.html" aria-current="page">Bandeja <span class="count">17</span></a>
+      <a href="index.html#tareas">Tareas <span class="count">5</span></a>
+      <a href="index.html#notas">Notas</a>
+      <a href="index.html#habitos">Hábitos</a>
+      <a href="index.html#objetivos">Objetivos</a>
+    </nav>
+    <div class="side-foot">
+      <p class="k">cuentas</p>
+      <span class="acc"><i class="acc-1"></i>ana@gmail.com</span>
+      <span class="acc"><i class="acc-2"></i>ana.facultad@gmail.com</span>
+      <span class="acc"><i class="acc-3"></i>ana.freelance@gmail.com</span>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-hd">
+      <p class="k">bandeja · 17 sin leer</p>
+      <h1>Correo</h1>
+      <div class="seg">
+        <label class="seg-opt"><input type="radio" name="account" value="all" checked>Todas</label>
+        <label class="seg-opt"><input type="radio" name="account" value="personal">Personal</label>
+        <label class="seg-opt"><input type="radio" name="account" value="facultad">Facultad</label>
+        <label class="seg-opt"><input type="radio" name="account" value="freelance">Freelance</label>
+      </div>
+    </div>
+    <div>
+      <article class="mail unread" data-account="facultad">
+        <i class="rail acc-2"></i>
+        <div class="body">
+          <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Secretaría Académica</strong><span class="tag tag-accent">facultad</span></div>
+          <div class="subject">Inscripción a finales — apertura 20/09</div>
+          <div class="snippet mut">Estimados alumnos, les informamos que el período de inscripción…</div>
+        </div>
+        <div class="side"><span class="mut">11:04</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+      </article>
+      <article class="mail" data-account="freelance">
+        <i class="rail acc-3"></i>
+        <div class="body">
+          <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Martín Rey</strong><span class="tag tag-neutral">freelance</span></div>
+          <div class="subject">Re: presupuesto sitio — adjunto</div>
+          <div class="snippet mut">Te paso el detalle revisado, avisame si…</div>
+        </div>
+        <div class="side"><span class="mut">10:22</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+      </article>
+      <article class="mail unread" data-account="facultad">
+        <i class="rail acc-2"></i>
+        <div class="body">
+          <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Cátedra Bases de Datos</strong><span class="tag tag-accent">facultad</span></div>
+          <div class="subject">TP2: consigna corregida</div>
+          <div class="snippet mut">Se extiende la entrega al jueves 16/09…</div>
+        </div>
+        <div class="side"><span class="mut">ayer</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+      </article>
+      <article class="mail" data-account="personal">
+        <i class="rail acc-1"></i>
+        <div class="body">
+          <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Biblioteca Municipal</strong><span class="tag tag-outline">personal</span></div>
+          <div class="subject">Vence tu préstamo el 18/09</div>
+          <div class="snippet mut">Sistemas operativos modernos — Tanenbaum</div>
+        </div>
+        <div class="side"><span class="mut">ayer</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+      </article>
+      <article class="mail" data-account="personal">
+        <i class="rail acc-1"></i>
+        <div class="body">
+          <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Mamá</strong><span class="tag tag-outline">personal</span></div>
+          <div class="subject">Domingo en casa</div>
+          <div class="snippet mut">¿Venís a comer el domingo?</div>
+        </div>
+        <div class="side"><span class="mut">12/09</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+      </article>
+      <article class="mail" data-account="facultad">
+        <i class="rail acc-2"></i>
+        <div class="body">
+          <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Cátedra Inglés Técnico</strong><span class="tag tag-accent">facultad</span></div>
+          <div class="subject">Material unidad 5</div>
+          <div class="snippet mut">Adjunto el PDF de lectura para el jueves…</div>
+        </div>
+        <div class="side"><span class="mut">11/09</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+      </article>
+    </div>
+  </main>
+</div>
+
+<nav class="tabbar">
+  <a href="index.html">Hoy</a>
+  <a href="facultad.html">Facultad</a>
+  <a href="bandeja.html" aria-current="page">Bandeja</a>
+  <a href="index.html#notas">Notas</a>
+</nav>
+<button class="btn btn-primary blueprint fab" data-open-capture aria-label="Capturar">+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button>
+
+<div class="dialog-backdrop" id="capture" hidden>
+  <div class="dialog blueprint" role="dialog" aria-label="Captura rápida">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <h2 class="dialog-title">Captura rápida</h2>
+    <input class="input" data-capture-input placeholder="Ej.: TP2 de BD jueves 18h">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <label class="radio"><input type="radio" name="kind" checked><span class="dot"></span>Tarea</label>
+      <label class="radio"><input type="radio" name="kind"><span class="dot"></span>Nota</label>
+      <label class="radio"><input type="radio" name="kind"><span class="dot"></span>Evento</label>
+    </div>
+    <p class="capture-hint mut" data-capture-hint>escribí fecha y hora y las detecto</p>
+    <div class="dialog-actions">
+      <button class="btn btn-secondary" data-close-capture>Cancelar</button>
+      <button class="btn btn-primary" data-close-capture>Guardar</button>
+    </div>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

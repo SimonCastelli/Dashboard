@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoy · Panel</title>
+<link rel="stylesheet" href="assets/industry.css">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <span class="nav-brand">PANEL · ANA</span>
+    <nav class="side-nav">
+      <a href="index.html" aria-current="page">Hoy</a>
+      <a href="facultad.html">Facultad</a>
+      <a href="bandeja.html">Bandeja <span class="count">17</span></a>
+      <a href="index.html#tareas">Tareas <span class="count">5</span></a>
+      <a href="index.html#notas">Notas</a>
+      <a href="index.html#habitos">Hábitos</a>
+      <a href="index.html#objetivos">Objetivos</a>
+    </nav>
+    <div class="side-foot">
+      <p class="k">cuentas</p>
+      <span class="acc"><i class="acc-1"></i>ana@gmail.com</span>
+      <span class="acc"><i class="acc-2"></i>ana.facultad@gmail.com</span>
+      <span class="acc"><i class="acc-3"></i>ana.freelance@gmail.com</span>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <p class="k">martes 14 septiembre</p>
+        <div class="now">13:42 · 18° nublado</div>
+      </div>
+      <div class="spacer"></div>
+      <input class="input" data-capture-input placeholder="Capturar: ‘TP2 de BD jueves 18h’">
+      <div class="seg">
+        <label class="seg-opt"><input type="radio" name="range" checked>Hoy</label>
+        <label class="seg-opt"><input type="radio" name="range">Semana</label>
+        <label class="seg-opt"><input type="radio" name="range">Mes</label>
+      </div>
+      <button class="btn btn-primary blueprint" data-open-capture>+ Capturar<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button>
+    </div>
+
+    <div class="grid">
+      <section class="cell w2">
+        <div class="cell-hd"><p class="k">semana 38</p><span class="mut" style="font-size:11px">6 eventos · 2 entregas</span></div>
+        <div class="month">
+          <span class="dow mut">L</span><span class="dow mut">M</span><span class="dow mut">M</span><span class="dow mut">J</span><span class="dow mut">V</span><span class="dow mut">S</span><span class="dow mut">D</span>
+          <div class="day"><span class="mut">13</span><div class="ev">Álgebra 08h</div></div>
+          <div class="day is-today"><strong>14</strong><div class="ev">Álgebra 08h</div><div class="ev">BD lab 15h</div><div class="ev">Gym 19h</div></div>
+          <div class="day"><span class="mut">15</span><div class="ev">SO 10h</div></div>
+          <div class="day"><span class="mut">16</span><div class="ev">Inglés 18h</div><div class="ev strong">Entrega TP2</div></div>
+          <div class="day"><span class="mut">17</span><div class="ev">BD teórico</div></div>
+          <div class="day"><span class="mut">18</span></div>
+          <div class="day"><span class="mut">19</span><div class="ev">Familia 13h</div></div>
+        </div>
+      </section>
+
+      <section class="cell">
+        <div class="cell-hd"><p class="k">bandeja unificada</p><a href="bandeja.html" style="font-size:11px">ver todo</a></div>
+        <div>
+          <div class="li"><i class="acc-1" style="width:8px;height:8px"></i><span>Personal</span><span class="mut" style="margin-left:auto">4</span></div>
+          <div class="li"><i class="acc-2" style="width:8px;height:8px"></i><span>Facultad</span><span class="mut" style="margin-left:auto">11</span></div>
+          <div class="li"><i class="acc-3" style="width:8px;height:8px"></i><span>Freelance</span><span class="mut" style="margin-left:auto">2</span></div>
+        </div>
+        <p style="font-size:12.5px;margin:0"><strong>Secretaría Académica</strong><br><span class="mut">Inscripción a finales abre el 20/09</span></p>
+        <p style="font-size:12.5px;margin:0"><strong>Martín Rey</strong><br><span class="mut">Re: presupuesto sitio — adjunto</span></p>
+      </section>
+
+      <section class="cell">
+        <div class="cell-hd"><p class="k">facultad</p><a href="facultad.html" style="font-size:11px">horario</a></div>
+        <div>
+          <div class="li"><span class="mut num">15:00</span><span>Bases de Datos</span><span class="mut" style="margin-left:auto">Lab 3</span></div>
+          <div class="li"><span class="mut num">mié 10:00</span><span>Sist. Operativos</span><span class="mut" style="margin-left:auto">A-112</span></div>
+          <div class="li"><span class="mut num">jue 18:00</span><span>Inglés Técnico</span><span class="mut" style="margin-left:auto">B-05</span></div>
+        </div>
+        <div class="ev" style="padding:8px 10px"><strong>Entrega TP2</strong> · jueves 16/09 — faltan 2 días</div>
+        <span class="mut" style="font-size:11.5px">asistencia 86% · 4 materias</span>
+      </section>
+
+      <section class="cell w2" id="tareas">
+        <div class="cell-hd"><p class="k">tareas · 5 abiertas</p><span class="mut" style="font-size:11px">por vencimiento</span></div>
+        <table class="table"><tbody>
+          <tr><td style="width:22px"><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Terminar TP2 de BD</td><td><span class="tag tag-accent">facultad</span></td><td class="mut" style="text-align:right">hoy</td></tr>
+          <tr><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Enviar presupuesto a Martín</td><td><span class="tag tag-neutral">freelance</span></td><td class="mut" style="text-align:right">mañana</td></tr>
+          <tr><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Pedir certificado de alumno regular</td><td><span class="tag tag-accent">facultad</span></td><td class="mut" style="text-align:right">16/09</td></tr>
+          <tr><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Leer paper de scheduling</td><td><span class="tag tag-outline">lectura</span></td><td class="mut" style="text-align:right">18/09</td></tr>
+          <tr><td><button class="check" aria-pressed="true" aria-label="Completar"></button></td><td class="label done">Resumen unidad 3</td><td></td><td class="mut" style="text-align:right">hecho</td></tr>
+        </tbody></table>
+        <button class="btn btn-secondary btn-block" data-open-capture>+ Nueva tarea</button>
+      </section>
+
+      <section class="cell" id="habitos">
+        <p class="k">hábitos · 14 días</p>
+        <div><div style="font-size:12.5px;margin-bottom:5px">Correr</div><div class="dots"><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i></div></div>
+        <div><div style="font-size:12.5px;margin-bottom:5px">Leer 30 min</div><div class="dots"><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i></div></div>
+        <div><div style="font-size:12.5px;margin-bottom:5px">Meditar</div><div class="dots"><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div></div>
+      </section>
+
+      <section class="cell" id="objetivos">
+        <p class="k">objetivos del cuatrimestre</p>
+        <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span>Aprobar 4 materias</span><span class="mut">2/4</span></div><div class="bar"><span style="width:50%"></span></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span>Leer 12 libros</span><span class="mut">7/12</span></div><div class="bar"><span style="width:58%"></span></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span>Correr 300 km</span><span class="mut">186/300</span></div><div class="bar"><span style="width:62%"></span></div></div>
+        <div id="notas"><p class="k">notas recientes</p><p class="mut" style="font-size:12.5px;margin:6px 0 0">Ideas TP final · Resumen SO cap. 4 · Compras</p></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<nav class="tabbar">
+  <a href="index.html" aria-current="page">Hoy</a>
+  <a href="facultad.html">Facultad</a>
+  <a href="bandeja.html">Bandeja</a>
+  <a href="index.html#notas">Notas</a>
+</nav>
+<button class="btn btn-primary blueprint fab" data-open-capture aria-label="Capturar">+<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button>
+
+<div class="dialog-backdrop" id="capture" hidden>
+  <div class="dialog blueprint" role="dialog" aria-label="Captura rápida">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <h2 class="dialog-title">Captura rápida</h2>
+    <input class="input" data-capture-input placeholder="Ej.: TP2 de BD jueves 18h">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <label class="radio"><input type="radio" name="kind" checked><span class="dot"></span>Tarea</label>
+      <label class="radio"><input type="radio" name="kind"><span class="dot"></span>Nota</label>
+      <label class="radio"><input type="radio" name="kind"><span class="dot"></span>Evento</label>
+    </div>
+    <p class="capture-hint mut" data-capture-hint>escribí fecha y hora y las detecto</p>
+    <div class="dialog-actions">
+      <button class="btn btn-secondary" data-close-capture>Cancelar</button>
+      <button class="btn btn-primary" data-close-capture>Guardar</button>
+    </div>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>
