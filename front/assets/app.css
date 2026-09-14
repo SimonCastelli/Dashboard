@@ -89,9 +89,10 @@ a{text-decoration:none}
 .stat strong{font-family:var(--font-heading);font-size:22px;line-height:1}
 
 /* ── captura ── */
-/* industry.css pone display:grid en .dialog-backdrop sin condición; sin este
-   override el diálogo queda visible (y bloqueando clics) aun con [hidden]. */
+/* industry.css/app.css ponen display:grid en .dialog-backdrop y .month sin
+   condición; sin estos overrides quedan visibles aun con [hidden]. */
 .dialog-backdrop[hidden]{display:none}
+.month[hidden]{display:none}
 .capture-hint{font-size:12px}
 .tabbar{display:none}
 .fab{display:none}

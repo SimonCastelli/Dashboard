@@ -10,7 +10,7 @@
 <body>
 <div class="app">
   <aside class="side">
-    <span class="nav-brand">PANEL · ANA</span>
+    <span class="nav-brand">PANEL · SIMÓN</span>
     <nav class="side-nav">
       <a href="index.html" aria-current="page">Hoy</a>
       <a href="facultad.html">Facultad</a>
@@ -22,9 +22,9 @@
     </nav>
     <div class="side-foot">
       <p class="k">cuentas</p>
-      <span class="acc"><i class="acc-1"></i>ana@gmail.com</span>
-      <span class="acc"><i class="acc-2"></i>ana.facultad@gmail.com</span>
-      <span class="acc"><i class="acc-3"></i>ana.freelance@gmail.com</span>
+      <span class="acc"><i class="acc-1"></i>castellisimon2@gmail.com</span>
+      <span class="acc"><i class="acc-2"></i>scastelli@fie.undef.edu.ar</span>
+      <span class="acc"><i class="acc-3"></i>castellisimon1@gmail.com</span>
     </div>
   </aside>
   <main class="main">
@@ -36,17 +36,25 @@
       <div class="spacer"></div>
       <input class="input" data-capture-input placeholder="Capturar: ‘TP2 de BD jueves 18h’">
       <div class="seg">
-        <label class="seg-opt"><input type="radio" name="range" checked>Hoy</label>
-        <label class="seg-opt"><input type="radio" name="range">Semana</label>
-        <label class="seg-opt"><input type="radio" name="range">Mes</label>
+        <label class="seg-opt"><input type="radio" name="range" value="today" checked>Hoy</label>
+        <label class="seg-opt"><input type="radio" name="range" value="week">Semana</label>
+        <label class="seg-opt"><input type="radio" name="range" value="month">Mes</label>
       </div>
       <button class="btn btn-primary blueprint" data-open-capture>+ Capturar<i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></button>
     </div>
 
     <div class="grid">
-      <section class="cell w2">
-        <div class="cell-hd"><p class="k">semana 38</p><span class="mut" style="font-size:11px">6 eventos · 2 entregas</span></div>
-        <div class="month">
+      <section class="cell w2" id="calendario">
+        <div class="cell-hd"><p class="k" data-range-title>hoy · martes 14 septiembre</p><span class="mut" style="font-size:11px" data-range-sub>3 eventos · TP2 en 2 días</span></div>
+
+        <div data-range="today" data-today>
+          <div class="li"><span class="mut num">08:00</span><span>Álgebra II</span><span class="mut" style="margin-left:auto">teórico · 204</span></div>
+          <div class="li"><span class="mut num">15:00</span><span>Bases de Datos</span><span class="mut" style="margin-left:auto">práctica · Lab 3</span></div>
+          <div class="li"><span class="mut num">19:00</span><span>Gimnasio</span><span class="mut" style="margin-left:auto">hábito</span></div>
+          <div class="ev strong" style="margin-top:4px">Entrega TP2 · jueves 16/09 — faltan 2 días</div>
+        </div>
+
+        <div class="month" data-range="week" hidden>
           <span class="dow mut">L</span><span class="dow mut">M</span><span class="dow mut">M</span><span class="dow mut">J</span><span class="dow mut">V</span><span class="dow mut">S</span><span class="dow mut">D</span>
           <div class="day"><span class="mut">13</span><div class="ev">Álgebra 08h</div></div>
           <div class="day is-today" data-today><strong>14</strong><div class="ev">Álgebra 08h</div><div class="ev">BD lab 15h</div><div class="ev">Gym 19h</div></div>
@@ -55,6 +63,45 @@
           <div class="day"><span class="mut">17</span><div class="ev">BD teórico</div></div>
           <div class="day"><span class="mut">18</span></div>
           <div class="day"><span class="mut">19</span><div class="ev">Familia 13h</div></div>
+        </div>
+
+        <div class="month" data-range="month" hidden>
+          <span class="dow mut">L</span><span class="dow mut">M</span><span class="dow mut">M</span><span class="dow mut">J</span><span class="dow mut">V</span><span class="dow mut">S</span><span class="dow mut">D</span>
+          <div class="day"><span class="mut">30</span></div>
+          <div class="day"><span class="mut">31</span></div>
+          <div class="day"><span class="mut">1</span></div>
+          <div class="day"><span class="mut">2</span></div>
+          <div class="day"><span class="mut">3</span></div>
+          <div class="day"><span class="mut">4</span></div>
+          <div class="day"><span class="mut">5</span></div>
+          <div class="day"><span class="mut">6</span></div>
+          <div class="day"><span class="mut">7</span></div>
+          <div class="day"><span class="mut">8</span></div>
+          <div class="day"><span class="mut">9</span></div>
+          <div class="day"><span class="mut">10</span></div>
+          <div class="day"><span class="mut">11</span></div>
+          <div class="day"><span class="mut">12</span></div>
+          <div class="day"><span class="mut">13</span></div>
+          <div class="day is-today" data-today><strong>14</strong></div>
+          <div class="day"><span class="mut">15</span></div>
+          <div class="day"><span class="mut">16</span><div class="ev strong">Entrega TP2</div></div>
+          <div class="day"><span class="mut">17</span></div>
+          <div class="day"><span class="mut">18</span></div>
+          <div class="day"><span class="mut">19</span></div>
+          <div class="day"><span class="mut">20</span></div>
+          <div class="day"><span class="mut">21</span></div>
+          <div class="day"><span class="mut">22</span></div>
+          <div class="day"><span class="mut">23</span></div>
+          <div class="day"><span class="mut">24</span></div>
+          <div class="day"><span class="mut">25</span></div>
+          <div class="day"><span class="mut">26</span></div>
+          <div class="day"><span class="mut">27</span></div>
+          <div class="day"><span class="mut">28</span></div>
+          <div class="day"><span class="mut">29</span></div>
+          <div class="day"><span class="mut">30</span></div>
+          <div class="day"><span class="mut">1</span></div>
+          <div class="day"><span class="mut">2</span></div>
+          <div class="day"><span class="mut">3</span></div>
         </div>
       </section>
 

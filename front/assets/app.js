@@ -157,17 +157,21 @@ function addNote(text) {
   renderNotes();
 }
 
-// ── evento del día de hoy ──
+// ── evento del día de hoy (se repite en cada vista que marca "hoy": la
+// agenda, la semana y el mes comparten [data-today]) ──
 function renderEvents() {
-  const cell = document.querySelector('[data-today]');
-  if (!cell) return;
-  cell.querySelectorAll('.ev[data-extra="1"]').forEach((n) => n.remove());
-  load(STORE.extraEvents, []).forEach((text) => {
-    const div = document.createElement('div');
-    div.className = 'ev';
-    div.dataset.extra = '1';
-    div.textContent = text;
-    cell.appendChild(div);
+  const cells = document.querySelectorAll('[data-today]');
+  if (!cells.length) return;
+  const items = load(STORE.extraEvents, []);
+  cells.forEach((cell) => {
+    cell.querySelectorAll('.ev[data-extra="1"]').forEach((n) => n.remove());
+    items.forEach((text) => {
+      const div = document.createElement('div');
+      div.className = 'ev';
+      div.dataset.extra = '1';
+      div.textContent = text;
+      cell.appendChild(div);
+    });
   });
 }
 function addEvent(text) {
@@ -294,6 +298,25 @@ document.querySelectorAll('[name="account"]').forEach((input) => {
     document.querySelectorAll('.mail').forEach((mail) => {
       mail.hidden = value !== 'all' && mail.dataset.account !== value;
     });
+  });
+});
+
+// Calendario de "Hoy": Hoy / Semana / Mes
+const RANGE_LABELS = {
+  today: { title: 'hoy · martes 14 septiembre', sub: '3 eventos · TP2 en 2 días' },
+  week: { title: 'semana 38', sub: '6 eventos · 2 entregas' },
+  month: { title: 'septiembre 2026', sub: '22 días de cursada · 1 entrega' },
+};
+document.querySelectorAll('[name="range"]').forEach((input) => {
+  input.addEventListener('change', () => {
+    const value = input.value;
+    document.querySelectorAll('[data-range]').forEach((el) => { el.hidden = el.dataset.range !== value; });
+    const label = RANGE_LABELS[value];
+    if (!label) return;
+    const title = document.querySelector('[data-range-title]');
+    const sub = document.querySelector('[data-range-sub]');
+    if (title) title.textContent = label.title;
+    if (sub) sub.textContent = label.sub;
   });
 });
 
