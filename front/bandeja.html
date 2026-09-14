@@ -14,8 +14,8 @@
     <nav class="side-nav">
       <a href="index.html">Hoy</a>
       <a href="facultad.html">Facultad</a>
-      <a href="bandeja.html" aria-current="page">Bandeja <span class="count">17</span></a>
-      <a href="index.html#tareas">Tareas <span class="count">5</span></a>
+      <a href="bandeja.html" aria-current="page">Bandeja <span class="count" data-badge="unread">17</span></a>
+      <a href="index.html#tareas">Tareas <span class="count" data-badge="tasks-open">5</span></a>
       <a href="index.html#notas">Notas</a>
       <a href="index.html#habitos">Hábitos</a>
       <a href="index.html#objetivos">Objetivos</a>
@@ -29,7 +29,7 @@
   </aside>
   <main class="main">
     <div class="page-hd">
-      <p class="k">bandeja · 17 sin leer</p>
+      <p class="k">bandeja · <span data-badge="unread">17</span> sin leer</p>
       <h1>Correo</h1>
       <div class="seg">
         <label class="seg-opt"><input type="radio" name="account" value="all" checked>Todas</label>
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div>
-      <article class="mail unread" data-account="facultad">
+      <article class="mail unread" data-account="facultad" data-id="m1" data-sender="Secretaría Académica" data-subject="Inscripción a finales — apertura 20/09">
         <i class="rail acc-2"></i>
         <div class="body">
           <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Secretaría Académica</strong><span class="tag tag-accent">facultad</span></div>
@@ -48,7 +48,7 @@
         </div>
         <div class="side"><span class="mut">11:04</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
-      <article class="mail" data-account="freelance">
+      <article class="mail" data-account="freelance" data-id="m2" data-sender="Martín Rey" data-subject="Re: presupuesto sitio — adjunto">
         <i class="rail acc-3"></i>
         <div class="body">
           <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Martín Rey</strong><span class="tag tag-neutral">freelance</span></div>
@@ -57,7 +57,7 @@
         </div>
         <div class="side"><span class="mut">10:22</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
-      <article class="mail unread" data-account="facultad">
+      <article class="mail unread" data-account="facultad" data-id="m3" data-sender="Cátedra Bases de Datos" data-subject="TP2: consigna corregida">
         <i class="rail acc-2"></i>
         <div class="body">
           <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Cátedra Bases de Datos</strong><span class="tag tag-accent">facultad</span></div>
@@ -66,7 +66,7 @@
         </div>
         <div class="side"><span class="mut">ayer</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
-      <article class="mail" data-account="personal">
+      <article class="mail" data-account="personal" data-id="m4" data-sender="Biblioteca Municipal" data-subject="Vence tu préstamo el 18/09">
         <i class="rail acc-1"></i>
         <div class="body">
           <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Biblioteca Municipal</strong><span class="tag tag-outline">personal</span></div>
@@ -75,7 +75,7 @@
         </div>
         <div class="side"><span class="mut">ayer</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
-      <article class="mail" data-account="personal">
+      <article class="mail" data-account="personal" data-id="m5" data-sender="Mamá" data-subject="Domingo en casa">
         <i class="rail acc-1"></i>
         <div class="body">
           <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Mamá</strong><span class="tag tag-outline">personal</span></div>
@@ -84,7 +84,7 @@
         </div>
         <div class="side"><span class="mut">12/09</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
-      <article class="mail" data-account="facultad">
+      <article class="mail" data-account="facultad" data-id="m6" data-sender="Cátedra Inglés Técnico" data-subject="Material unidad 5">
         <i class="rail acc-2"></i>
         <div class="body">
           <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Cátedra Inglés Técnico</strong><span class="tag tag-accent">facultad</span></div>
@@ -118,7 +118,7 @@
     <p class="capture-hint mut" data-capture-hint>escribí fecha y hora y las detecto</p>
     <div class="dialog-actions">
       <button class="btn btn-secondary" data-close-capture>Cancelar</button>
-      <button class="btn btn-primary" data-close-capture>Guardar</button>
+      <button class="btn btn-primary" data-save-capture>Guardar</button>
     </div>
   </div>
 </div>

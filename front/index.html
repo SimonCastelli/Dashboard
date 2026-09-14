@@ -14,8 +14,8 @@
     <nav class="side-nav">
       <a href="index.html" aria-current="page">Hoy</a>
       <a href="facultad.html">Facultad</a>
-      <a href="bandeja.html">Bandeja <span class="count">17</span></a>
-      <a href="index.html#tareas">Tareas <span class="count">5</span></a>
+      <a href="bandeja.html">Bandeja <span class="count" data-badge="unread">17</span></a>
+      <a href="index.html#tareas">Tareas <span class="count" data-badge="tasks-open">5</span></a>
       <a href="index.html#notas">Notas</a>
       <a href="index.html#habitos">Hábitos</a>
       <a href="index.html#objetivos">Objetivos</a>
@@ -49,7 +49,7 @@
         <div class="month">
           <span class="dow mut">L</span><span class="dow mut">M</span><span class="dow mut">M</span><span class="dow mut">J</span><span class="dow mut">V</span><span class="dow mut">S</span><span class="dow mut">D</span>
           <div class="day"><span class="mut">13</span><div class="ev">Álgebra 08h</div></div>
-          <div class="day is-today"><strong>14</strong><div class="ev">Álgebra 08h</div><div class="ev">BD lab 15h</div><div class="ev">Gym 19h</div></div>
+          <div class="day is-today" data-today><strong>14</strong><div class="ev">Álgebra 08h</div><div class="ev">BD lab 15h</div><div class="ev">Gym 19h</div></div>
           <div class="day"><span class="mut">15</span><div class="ev">SO 10h</div></div>
           <div class="day"><span class="mut">16</span><div class="ev">Inglés 18h</div><div class="ev strong">Entrega TP2</div></div>
           <div class="day"><span class="mut">17</span><div class="ev">BD teórico</div></div>
@@ -81,22 +81,22 @@
       </section>
 
       <section class="cell w2" id="tareas">
-        <div class="cell-hd"><p class="k">tareas · 5 abiertas</p><span class="mut" style="font-size:11px">por vencimiento</span></div>
-        <table class="table"><tbody>
-          <tr><td style="width:22px"><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Terminar TP2 de BD</td><td><span class="tag tag-accent">facultad</span></td><td class="mut" style="text-align:right">hoy</td></tr>
-          <tr><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Enviar presupuesto a Martín</td><td><span class="tag tag-neutral">freelance</span></td><td class="mut" style="text-align:right">mañana</td></tr>
-          <tr><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Pedir certificado de alumno regular</td><td><span class="tag tag-accent">facultad</span></td><td class="mut" style="text-align:right">16/09</td></tr>
-          <tr><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Leer paper de scheduling</td><td><span class="tag tag-outline">lectura</span></td><td class="mut" style="text-align:right">18/09</td></tr>
-          <tr><td><button class="check" aria-pressed="true" aria-label="Completar"></button></td><td class="label done">Resumen unidad 3</td><td></td><td class="mut" style="text-align:right">hecho</td></tr>
+        <div class="cell-hd"><p class="k">tareas · <span data-badge="tasks-open">5</span> abiertas</p><span class="mut" style="font-size:11px">por vencimiento</span></div>
+        <table class="table"><tbody data-tasks-body>
+          <tr data-id="t1"><td style="width:22px"><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Terminar TP2 de BD</td><td><span class="tag tag-accent">facultad</span></td><td class="mut" style="text-align:right">hoy</td></tr>
+          <tr data-id="t2"><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Enviar presupuesto a Martín</td><td><span class="tag tag-neutral">freelance</span></td><td class="mut" style="text-align:right">mañana</td></tr>
+          <tr data-id="t3"><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Pedir certificado de alumno regular</td><td><span class="tag tag-accent">facultad</span></td><td class="mut" style="text-align:right">16/09</td></tr>
+          <tr data-id="t4"><td><button class="check" aria-pressed="false" aria-label="Completar"></button></td><td class="label">Leer paper de scheduling</td><td><span class="tag tag-outline">lectura</span></td><td class="mut" style="text-align:right">18/09</td></tr>
+          <tr data-id="t5"><td><button class="check" aria-pressed="true" aria-label="Completar"></button></td><td class="label done">Resumen unidad 3</td><td></td><td class="mut" style="text-align:right">hecho</td></tr>
         </tbody></table>
         <button class="btn btn-secondary btn-block" data-open-capture>+ Nueva tarea</button>
       </section>
 
       <section class="cell" id="habitos">
         <p class="k">hábitos · 14 días</p>
-        <div><div style="font-size:12.5px;margin-bottom:5px">Correr</div><div class="dots"><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i></div></div>
-        <div><div style="font-size:12.5px;margin-bottom:5px">Leer 30 min</div><div class="dots"><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i></div></div>
-        <div><div style="font-size:12.5px;margin-bottom:5px">Meditar</div><div class="dots"><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div></div>
+        <div><div style="font-size:12.5px;margin-bottom:5px">Correr</div><div class="dots" data-habit="correr"><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i></div></div>
+        <div><div style="font-size:12.5px;margin-bottom:5px">Leer 30 min</div><div class="dots" data-habit="leer"><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i></div></div>
+        <div><div style="font-size:12.5px;margin-bottom:5px">Meditar</div><div class="dots" data-habit="meditar"><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div></div>
       </section>
 
       <section class="cell" id="objetivos">
@@ -104,7 +104,7 @@
         <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span>Aprobar 4 materias</span><span class="mut">2/4</span></div><div class="bar"><span style="width:50%"></span></div></div>
         <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span>Leer 12 libros</span><span class="mut">7/12</span></div><div class="bar"><span style="width:58%"></span></div></div>
         <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span>Correr 300 km</span><span class="mut">186/300</span></div><div class="bar"><span style="width:62%"></span></div></div>
-        <div id="notas"><p class="k">notas recientes</p><p class="mut" style="font-size:12.5px;margin:6px 0 0">Ideas TP final · Resumen SO cap. 4 · Compras</p></div>
+        <div id="notas"><p class="k">notas recientes</p><p class="mut" style="font-size:12.5px;margin:6px 0 0" data-notes-text data-notes-base="Ideas TP final · Resumen SO cap. 4 · Compras">Ideas TP final · Resumen SO cap. 4 · Compras</p></div>
       </section>
     </div>
   </main>
@@ -131,7 +131,7 @@
     <p class="capture-hint mut" data-capture-hint>escribí fecha y hora y las detecto</p>
     <div class="dialog-actions">
       <button class="btn btn-secondary" data-close-capture>Cancelar</button>
-      <button class="btn btn-primary" data-close-capture>Guardar</button>
+      <button class="btn btn-primary" data-save-capture>Guardar</button>
     </div>
   </div>
 </div>
