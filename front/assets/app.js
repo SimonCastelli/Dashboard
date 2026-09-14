@@ -107,8 +107,14 @@ function countUnread() {
     return read === undefined ? SAMPLE_MAIL_UNREAD_DEFAULT[id] : !read;
   }).length;
 }
-function accountTagText(acc) { return acc === 'facultad' ? 'facultad' : acc === 'freelance' ? 'freelance' : 'personal'; }
-function accountTagClass(acc) { return acc === 'facultad' ? 'tag-accent' : acc === 'freelance' ? 'tag-neutral' : 'tag-outline'; }
+const ACCOUNT_TAGS = {
+  facultad: 'tag-accent',
+  freelance: 'tag-neutral',
+  personal: 'tag-outline',
+  otros: 'tag-accent-2',
+};
+function accountTagText(acc) { return ACCOUNT_TAGS[acc] ? acc : 'personal'; }
+function accountTagClass(acc) { return ACCOUNT_TAGS[acc] || 'tag-outline'; }
 function renderMailStatuses() {
   const mails = document.querySelectorAll('.mail[data-id]');
   if (!mails.length) return;
@@ -188,14 +194,59 @@ function updateBadges() {
 }
 
 // ── captura rápida: detección de fecha/hora/destino ──
+// "Hoy" en este mock es fijo (martes 14/09/2026, ver topbar) — se usa como
+// referencia para que chrono-node resuelva fechas relativas ("jueves",
+// "mañana", "en 3 días") de forma consistente con el resto de la app.
+const TODAY_REF = new Date(2026, 8, 14, 12, 0, 0);
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+function formatDue(date) { return date.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit' }); }
+function formatFriendly(date) { return date.toLocaleDateString('es-AR', { day: 'numeric', month: 'long' }); }
+function nextWeekday(targetIdx) {
+  const d = new Date(TODAY_REF);
+  const diff = (targetIdx - d.getDay() + 7) % 7 || 7;
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+// Respaldo propio de "día de mes" ("4 de oct", "4 octubre") para cuando
+// chrono-node no está disponible (sin red, CDN caído) — así la detección de
+// fechas no depende por completo de un tercero.
+function parseDayOfMonth(lower) {
+  const m = lower.match(/\b(\d{1,2})\s*(?:de\s+)?([a-zé]{3,})\b/);
+  if (!m) return null;
+  const day = parseInt(m[1], 10);
+  if (day < 1 || day > 31) return null;
+  const token = m[2].replace(/^set/, 'sep'); // "setiembre", variante válida
+  const monthIdx = MONTHS.findIndex((mo) => mo.startsWith(token.slice(0, 3)));
+  if (monthIdx < 0) return null;
+  const year = TODAY_REF.getFullYear() + (monthIdx < TODAY_REF.getMonth() ? 1 : 0);
+  return new Date(year, monthIdx, day, 12);
+}
+// Detecta fecha/hora en texto libre ("tp 4 de oct", "el jueves 18h", "mañana").
+// Usa chrono-node (natural-language date parser) cuando está disponible —
+// entiende fechas numéricas, nombres de mes y relativas, no solo "jueves" o
+// "20h" sueltos — y si no cargó (o no reconoce nada) cae a un detector propio
+// simple de día de la semana + hora.
 function parseCapture(text) {
+  const tag = /tp|parcial|final|c[aá]tedra|facultad/i.test(text) ? 'facultad' : null;
+  if (window.chrono && typeof window.chrono.parse === 'function') {
+    try {
+      const [result] = window.chrono.parse(text, TODAY_REF, { forwardDate: true });
+      if (result) {
+        const date = result.start.date();
+        const time = result.start.isCertain('hour')
+          ? date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })
+          : null;
+        return { date, time, tag };
+      }
+    } catch { /* si chrono falla por lo que sea, seguimos con el detector simple */ }
+  }
   const lower = text.toLowerCase();
-  const day = DAYS.find((d) => lower.includes(d.slice(0, 4)));
+  const dayName = DAYS.find((d) => lower.includes(d.slice(0, 4)));
   const timeMatch = lower.match(/(\d{1,2})\s?(?:h|:\d{2})/);
   const time = timeMatch ? timeMatch[0].replace('h', ':00') : null;
-  const tag = /tp|parcial|final|c[aá]tedra|facultad/.test(lower) ? 'facultad' : null;
-  return { day, time, tag };
+  const date = dayName ? nextWeekday(DAYS.indexOf(dayName)) : parseDayOfMonth(lower);
+  return { date, time, tag };
 }
 function selectedKind() {
   const checked = document.querySelector('[name="kind"]:checked');
@@ -206,18 +257,19 @@ function saveCapture(sourceInput) {
   const active = sourceInput || ((!dialog || dialog.hidden) ? document.querySelector('[data-capture-input]') : dialog.querySelector('[data-capture-input]'));
   const text = (active && active.value || '').trim();
   if (!text) { closeCapture(); return; }
-  const { day, tag } = parseCapture(text);
+  const { date, time, tag } = parseCapture(text);
   const kind = selectedKind();
+  const dateLabel = date ? formatFriendly(date) : null;
   if (kind === 'Nota') {
     addNote(text);
   } else if (kind === 'Evento') {
-    addEvent(day ? `${capitalize(day)}: ${text}` : text);
+    addEvent(dateLabel ? `${dateLabel}${time ? ' ' + time : ''}: ${text}` : text);
   } else {
     addTask({
       label: text,
       tagText: tag || 'personal',
       tagClass: tag ? 'tag-accent' : 'tag-outline',
-      due: day ? capitalize(day) : 'sin fecha',
+      due: date ? formatDue(date) : 'sin fecha',
     });
   }
   updateBadges();
@@ -310,13 +362,36 @@ const RANGE_LABELS = {
 document.querySelectorAll('[name="range"]').forEach((input) => {
   input.addEventListener('change', () => {
     const value = input.value;
-    document.querySelectorAll('[data-range]').forEach((el) => { el.hidden = el.dataset.range !== value; });
+    document.querySelectorAll('[data-range]').forEach((el) => {
+      const active = el.dataset.range === value;
+      el.classList.toggle('is-active', active);
+      el.setAttribute('aria-hidden', String(!active));
+    });
     const label = RANGE_LABELS[value];
     if (!label) return;
     const title = document.querySelector('[data-range-title]');
     const sub = document.querySelector('[data-range-sub]');
     if (title) title.textContent = label.title;
     if (sub) sub.textContent = label.sub;
+  });
+});
+
+// Enlaces del sidebar a secciones dentro de "Hoy" (Tareas/Notas/Hábitos/
+// Objetivos): si ya estamos en index.html, en vez de un salto de ancla mudo
+// (que no se nota si la sección ya está a la vista) hacemos scroll suave y
+// resaltamos el destino, para que quede claro que el click hizo algo.
+document.querySelectorAll('.side-nav a[href*="#"]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    const url = new URL(link.href);
+    if (url.pathname !== location.pathname) return; // navega normal a otra página
+    const target = document.getElementById(url.hash.slice(1));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.replaceState(null, '', url.hash);
+    target.classList.remove('jump-flash');
+    void target.offsetWidth; // fuerza reflow para poder re-disparar la animación
+    target.classList.add('jump-flash');
   });
 });
 
@@ -337,9 +412,9 @@ document.querySelectorAll('[data-capture-input]').forEach((input) => {
   input.addEventListener('input', () => {
     const hint = document.querySelector('[data-capture-hint]');
     if (!hint) return;
-    const { day, time, tag } = parseCapture(input.value);
+    const { date, time, tag } = parseCapture(input.value);
     const bits = [];
-    if (day) bits.push(day);
+    if (date) bits.push(formatFriendly(date));
     if (time) bits.push(time);
     if (tag) bits.push('destino Facultad');
     hint.textContent = bits.length ? 'detectado: ' + bits.join(' · ') : 'escribí fecha y hora y las detecto';

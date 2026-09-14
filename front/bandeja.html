@@ -25,6 +25,7 @@
       <span class="acc"><i class="acc-1"></i>castellisimon2@gmail.com</span>
       <span class="acc"><i class="acc-2"></i>scastelli@fie.undef.edu.ar</span>
       <span class="acc"><i class="acc-3"></i>castellisimon1@gmail.com</span>
+      <span class="acc"><i class="acc-4"></i>castellisimon3@gmail.com</span>
     </div>
   </aside>
   <main class="main">
@@ -36,6 +37,7 @@
         <label class="seg-opt"><input type="radio" name="account" value="personal">Personal</label>
         <label class="seg-opt"><input type="radio" name="account" value="facultad">Facultad</label>
         <label class="seg-opt"><input type="radio" name="account" value="freelance">Freelance</label>
+        <label class="seg-opt"><input type="radio" name="account" value="otros">Otros</label>
       </div>
     </div>
     <div>
@@ -46,7 +48,7 @@
           <div class="subject">Inscripción a finales — apertura 20/09</div>
           <div class="snippet mut">Estimados alumnos, les informamos que el período de inscripción…</div>
         </div>
-        <div class="side"><span class="mut">11:04</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+        <div class="mail-meta"><span class="mut">11:04</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
       <article class="mail" data-account="freelance" data-id="m2" data-sender="Martín Rey" data-subject="Re: presupuesto sitio — adjunto">
         <i class="rail acc-3"></i>
@@ -55,7 +57,7 @@
           <div class="subject">Re: presupuesto sitio — adjunto</div>
           <div class="snippet mut">Te paso el detalle revisado, avisame si…</div>
         </div>
-        <div class="side"><span class="mut">10:22</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+        <div class="mail-meta"><span class="mut">10:22</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
       <article class="mail unread" data-account="facultad" data-id="m3" data-sender="Cátedra Bases de Datos" data-subject="TP2: consigna corregida">
         <i class="rail acc-2"></i>
@@ -64,16 +66,16 @@
           <div class="subject">TP2: consigna corregida</div>
           <div class="snippet mut">Se extiende la entrega al jueves 16/09…</div>
         </div>
-        <div class="side"><span class="mut">ayer</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+        <div class="mail-meta"><span class="mut">ayer</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
-      <article class="mail" data-account="personal" data-id="m4" data-sender="Biblioteca Municipal" data-subject="Vence tu préstamo el 18/09">
-        <i class="rail acc-1"></i>
+      <article class="mail" data-account="otros" data-id="m4" data-sender="Biblioteca Municipal" data-subject="Vence tu préstamo el 18/09">
+        <i class="rail acc-4"></i>
         <div class="body">
-          <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Biblioteca Municipal</strong><span class="tag tag-outline">personal</span></div>
+          <div style="display:flex;gap:8px;align-items:baseline"><strong style="font-size:14px">Biblioteca Municipal</strong><span class="tag tag-accent-2">otros</span></div>
           <div class="subject">Vence tu préstamo el 18/09</div>
           <div class="snippet mut">Sistemas operativos modernos — Tanenbaum</div>
         </div>
-        <div class="side"><span class="mut">ayer</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+        <div class="mail-meta"><span class="mut">ayer</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
       <article class="mail" data-account="personal" data-id="m5" data-sender="Mamá" data-subject="Domingo en casa">
         <i class="rail acc-1"></i>
@@ -82,7 +84,7 @@
           <div class="subject">Domingo en casa</div>
           <div class="snippet mut">¿Venís a comer el domingo?</div>
         </div>
-        <div class="side"><span class="mut">12/09</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+        <div class="mail-meta"><span class="mut">12/09</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
       <article class="mail" data-account="facultad" data-id="m6" data-sender="Cátedra Inglés Técnico" data-subject="Material unidad 5">
         <i class="rail acc-2"></i>
@@ -91,7 +93,7 @@
           <div class="subject">Material unidad 5</div>
           <div class="snippet mut">Adjunto el PDF de lectura para el jueves…</div>
         </div>
-        <div class="side"><span class="mut">11/09</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
+        <div class="mail-meta"><span class="mut">11/09</span><button class="btn btn-ghost" data-to-task style="font-size:12px">→ Tarea</button></div>
       </article>
     </div>
   </main>
@@ -122,6 +124,7 @@
     </div>
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chrono-node/1.0.9/chrono.min.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

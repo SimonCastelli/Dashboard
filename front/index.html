@@ -25,6 +25,7 @@
       <span class="acc"><i class="acc-1"></i>castellisimon2@gmail.com</span>
       <span class="acc"><i class="acc-2"></i>scastelli@fie.undef.edu.ar</span>
       <span class="acc"><i class="acc-3"></i>castellisimon1@gmail.com</span>
+      <span class="acc"><i class="acc-4"></i>castellisimon3@gmail.com</span>
     </div>
   </aside>
   <main class="main">
@@ -47,14 +48,15 @@
       <section class="cell w2" id="calendario">
         <div class="cell-hd"><p class="k" data-range-title>hoy · martes 14 septiembre</p><span class="mut" style="font-size:11px" data-range-sub>3 eventos · TP2 en 2 días</span></div>
 
-        <div data-range="today" data-today>
+        <div class="range-stack">
+        <div class="is-active" data-range="today" data-today>
           <div class="li"><span class="mut num">08:00</span><span>Álgebra II</span><span class="mut" style="margin-left:auto">teórico · 204</span></div>
           <div class="li"><span class="mut num">15:00</span><span>Bases de Datos</span><span class="mut" style="margin-left:auto">práctica · Lab 3</span></div>
           <div class="li"><span class="mut num">19:00</span><span>Gimnasio</span><span class="mut" style="margin-left:auto">hábito</span></div>
           <div class="ev strong" style="margin-top:4px">Entrega TP2 · jueves 16/09 — faltan 2 días</div>
         </div>
 
-        <div class="month" data-range="week" hidden>
+        <div class="month" data-range="week">
           <span class="dow mut">L</span><span class="dow mut">M</span><span class="dow mut">M</span><span class="dow mut">J</span><span class="dow mut">V</span><span class="dow mut">S</span><span class="dow mut">D</span>
           <div class="day"><span class="mut">13</span><div class="ev">Álgebra 08h</div></div>
           <div class="day is-today" data-today><strong>14</strong><div class="ev">Álgebra 08h</div><div class="ev">BD lab 15h</div><div class="ev">Gym 19h</div></div>
@@ -65,7 +67,7 @@
           <div class="day"><span class="mut">19</span><div class="ev">Familia 13h</div></div>
         </div>
 
-        <div class="month" data-range="month" hidden>
+        <div class="month" data-range="month">
           <span class="dow mut">L</span><span class="dow mut">M</span><span class="dow mut">M</span><span class="dow mut">J</span><span class="dow mut">V</span><span class="dow mut">S</span><span class="dow mut">D</span>
           <div class="day"><span class="mut">30</span></div>
           <div class="day"><span class="mut">31</span></div>
@@ -103,6 +105,7 @@
           <div class="day"><span class="mut">2</span></div>
           <div class="day"><span class="mut">3</span></div>
         </div>
+        </div>
       </section>
 
       <section class="cell">
@@ -111,6 +114,7 @@
           <div class="li"><i class="acc-1" style="width:8px;height:8px"></i><span>Personal</span><span class="mut" style="margin-left:auto">4</span></div>
           <div class="li"><i class="acc-2" style="width:8px;height:8px"></i><span>Facultad</span><span class="mut" style="margin-left:auto">11</span></div>
           <div class="li"><i class="acc-3" style="width:8px;height:8px"></i><span>Freelance</span><span class="mut" style="margin-left:auto">2</span></div>
+          <div class="li"><i class="acc-4" style="width:8px;height:8px"></i><span>Otros</span><span class="mut" style="margin-left:auto">1</span></div>
         </div>
         <p style="font-size:12.5px;margin:0"><strong>Secretaría Académica</strong><br><span class="mut">Inscripción a finales abre el 20/09</span></p>
         <p style="font-size:12.5px;margin:0"><strong>Martín Rey</strong><br><span class="mut">Re: presupuesto sitio — adjunto</span></p>
@@ -182,6 +186,7 @@
     </div>
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chrono-node/1.0.9/chrono.min.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

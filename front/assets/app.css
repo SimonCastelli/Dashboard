@@ -16,7 +16,7 @@ a{text-decoration:none}
 .side-foot{margin-top:auto;padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-2);font-size:12px}
 .acc{display:flex;align-items:center;gap:7px}
 .acc i{width:7px;height:7px;flex:none}
-.acc-1{background:var(--color-accent)} .acc-2{background:var(--color-accent-700)} .acc-3{background:var(--color-accent-400)}
+.acc-1{background:var(--color-accent)} .acc-2{background:var(--color-accent-700)} .acc-3{background:var(--color-accent-400)} .acc-4{background:var(--color-accent-2-600)}
 
 .main{min-width:0}
 .topbar{display:flex;align-items:center;gap:var(--space-4);padding:var(--space-3) var(--space-6);border-bottom:1px solid var(--line);flex-wrap:wrap}
@@ -34,6 +34,13 @@ a{text-decoration:none}
 .num{font-variant-numeric:tabular-nums}
 
 /* ── calendario ── */
+/* Hoy/Semana/Mes comparten una sola celda de grilla (superpuestas) para que
+   el contenedor siempre mida lo que mide la vista más alta (mes) — así
+   cambiar de vista no corre el resto del dashboard, y hoy/semana quedan con
+   ese mismo alto (con espacio vacío) en vez de achicar y agrandar el layout. */
+.range-stack{display:grid}
+.range-stack>[data-range]{grid-area:1/1;min-width:0}
+.range-stack>[data-range]:not(.is-active){visibility:hidden;pointer-events:none}
 .month{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:11px}
 .month .dow{text-align:center}
 .day{border:1px solid color-mix(in srgb, var(--color-text) 12%, transparent);min-height:92px;padding:3px}
@@ -72,13 +79,16 @@ a{text-decoration:none}
 .slot-card .room{font-size:11.5px}
 
 /* ── bandeja ── */
-.mail{display:flex;gap:12px;padding:13px var(--space-6);border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%, transparent)}
+/* nota: la columna de hora/acción de cada mail se llama .mail-meta, NO .side —
+   .side ya es la clase del sidebar (con height:100vh); si comparten nombre,
+   esa altura se cuela en cada fila de correo y las infla a pantalla completa. */
+.mail{display:flex;align-items:flex-start;gap:12px;padding:11px var(--space-6);border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%, transparent)}
 .mail.unread{background:color-mix(in srgb,var(--color-accent) 6%, transparent)}
-.mail .rail{width:3px;flex:none}
-.mail .body{flex:1;min-width:0}
+.mail .rail{align-self:stretch;width:3px;flex:none}
+.mail .body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .mail .subject{font-size:13.5px}
 .mail .snippet{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mail .side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:12px}
+.mail-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:12px;flex:none}
 .mail[hidden]{display:none}
 
 .page-hd{padding:var(--space-6) var(--space-6) var(--space-4);border-bottom:1px solid var(--line)}
@@ -93,7 +103,16 @@ a{text-decoration:none}
    condición; sin estos overrides quedan visibles aun con [hidden]. */
 .dialog-backdrop[hidden]{display:none}
 .month[hidden]{display:none}
+/* industry.css deja el fondo del .dialog transparente (estética "blueprint");
+   acá el único .dialog es la captura rápida, que necesita fondo sólido para
+   leerse por encima del dashboard en vez de mezclarse con lo de atrás. */
+.dialog{background:var(--color-bg)}
 .capture-hint{font-size:12px}
+
+/* ── enlaces del sidebar a secciones dentro de "Hoy" (tareas/notas/hábitos/
+   objetivos): al hacer click se resalta el destino para que se note. ── */
+@keyframes jump-flash{from{outline-color:var(--color-accent)}to{outline-color:transparent}}
+.jump-flash{outline:2px solid transparent;outline-offset:5px;animation:jump-flash 1.1s ease-out}
 .tabbar{display:none}
 .fab{display:none}
 
