@@ -16,7 +16,7 @@ a{text-decoration:none}
 .side-foot{margin-top:auto;padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-2);font-size:12px}
 .acc{display:flex;align-items:center;gap:7px}
 .acc i{width:7px;height:7px;flex:none}
-.acc-1{background:var(--color-accent)} .acc-2{background:var(--color-accent-700)} .acc-3{background:var(--color-accent-400)}
+.acc-1{background:var(--color-accent)} .acc-2{background:var(--color-accent-700)} .acc-3{background:var(--color-accent-400)} .acc-4{background:var(--color-accent-2-600)}
 
 .main{min-width:0}
 .topbar{display:flex;align-items:center;gap:var(--space-4);padding:var(--space-3) var(--space-6);border-bottom:1px solid var(--line);flex-wrap:wrap}
@@ -30,11 +30,23 @@ a{text-decoration:none}
 .cell.w2{grid-column:span 2}
 .k{font:600 10px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent);margin:0}
 .cell-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cell-hd>a{white-space:nowrap;flex:none}
 .mut{color:color-mix(in srgb, var(--color-text) 55%, transparent)}
 .num{font-variant-numeric:tabular-nums}
 
 /* ── calendario ── */
-.month{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:11px}
+/* Hoy/Semana/Mes comparten una sola celda de grilla (superpuestas) para que
+   el contenedor siempre mida lo que mide la vista más alta (mes) — así
+   cambiar de vista no corre el resto del dashboard, y hoy/semana quedan con
+   ese mismo alto (con espacio vacío) en vez de achicar y agrandar el layout. */
+.range-stack{display:grid}
+.range-stack>[data-range]{grid-area:1/1;min-width:0}
+.range-stack>[data-range]:not(.is-active){visibility:hidden;pointer-events:none}
+/* align-content:start evita que, al estirarse .month para igualar el alto de
+   la vista mes (ver .range-stack), el espacio sobrante se reparta entre la
+   fila de encabezados y la de días (quedaría un hueco "en el medio"); así
+   las filas miden su alto natural y el sobrante queda abajo, todo junto. */
+.month{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:11px;align-content:start}
 .month .dow{text-align:center}
 .day{border:1px solid color-mix(in srgb, var(--color-text) 12%, transparent);min-height:92px;padding:3px}
 .day.is-today{border-color:var(--color-accent)}
@@ -72,13 +84,16 @@ a{text-decoration:none}
 .slot-card .room{font-size:11.5px}
 
 /* ── bandeja ── */
-.mail{display:flex;gap:12px;padding:13px var(--space-6);border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%, transparent)}
+/* nota: la columna de hora/acción de cada mail se llama .mail-meta, NO .side —
+   .side ya es la clase del sidebar (con height:100vh); si comparten nombre,
+   esa altura se cuela en cada fila de correo y las infla a pantalla completa. */
+.mail{display:flex;align-items:flex-start;gap:12px;padding:11px var(--space-6);border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%, transparent)}
 .mail.unread{background:color-mix(in srgb,var(--color-accent) 6%, transparent)}
-.mail .rail{width:3px;flex:none}
-.mail .body{flex:1;min-width:0}
+.mail .rail{align-self:stretch;width:3px;flex:none}
+.mail .body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .mail .subject{font-size:13.5px}
 .mail .snippet{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mail .side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:12px}
+.mail-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:12px;flex:none}
 .mail[hidden]{display:none}
 
 .page-hd{padding:var(--space-6) var(--space-6) var(--space-4);border-bottom:1px solid var(--line)}
@@ -89,6 +104,14 @@ a{text-decoration:none}
 .stat strong{font-family:var(--font-heading);font-size:22px;line-height:1}
 
 /* ── captura ── */
+/* industry.css/app.css ponen display:grid en .dialog-backdrop y .month sin
+   condición; sin estos overrides quedan visibles aun con [hidden]. */
+.dialog-backdrop[hidden]{display:none}
+.month[hidden]{display:none}
+/* industry.css deja el fondo del .dialog transparente (estética "blueprint");
+   acá el único .dialog es la captura rápida, que necesita fondo sólido para
+   leerse por encima del dashboard en vez de mezclarse con lo de atrás. */
+.dialog{background:var(--color-bg)}
 .capture-hint{font-size:12px}
 .tabbar{display:none}
 .fab{display:none}
@@ -115,4 +138,54 @@ a{text-decoration:none}
   .tabbar a{display:flex;flex-direction:column;align-items:center;gap:4px;font:600 9px/1 var(--font-heading);letter-spacing:.1em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 50%,transparent)}
   .tabbar a[aria-current="page"]{color:var(--color-accent)}
   .fab{display:inline-flex;position:fixed;right:16px;bottom:88px;width:54px;height:54px;font-size:24px;padding:0;z-index:6}
+  .split-list{padding:var(--space-4)}
+  .split-detail{padding:var(--space-4)}
+  .field-row,.stats.two{grid-template-columns:1fr}
+  .dots.wide{grid-template-columns:repeat(15,1fr)}
+  .month-dots{grid-template-columns:repeat(10,1fr)}
+  .page-hd-actions{width:100%}
+  .page-hd-actions .btn{flex:1}
 }
+
+/* ── pantallas de gestión: tareas, hábitos, objetivos ── */
+.page-hd-row{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap}
+.page-hd-actions{display:flex;gap:8px;flex-wrap:wrap}
+.tools{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-3)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 400px}
+.split-list{padding:var(--space-6);min-width:0}
+.split-detail{border-left:1px solid var(--line);padding:var(--space-6);display:flex;flex-direction:column;gap:var(--space-4);min-width:0}
+.group-hd{margin:var(--space-6) 0 var(--space-2)}
+.group-hd:first-child{margin-top:0}
+.rows{list-style:none;margin:0;padding:0}
+.rows .row{display:flex;align-items:flex-start;gap:12px;padding:11px 12px;border:1px solid var(--line);border-bottom:0}
+.rows .row:last-child{border-bottom:1px solid var(--line)}
+.rows .row.is-active{border-color:var(--color-accent);background:color-mix(in srgb,var(--color-accent) 8%, transparent);position:relative;z-index:1}
+.rows .row.is-done .label,.rows .row.is-paused .label{color:color-mix(in srgb,var(--color-text) 50%,transparent)}
+.rows.compact .row{padding:7px 0;border:0;border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%,transparent)}
+.rows.compact .row:last-child{border-bottom:0}
+.row-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.row-body .label{font-size:14px}
+.row-meta{font-size:11.5px}
+.row-due{font-size:12px;white-space:nowrap;padding-top:2px}
+.dots.wide{grid-template-columns:repeat(30,1fr);margin-top:3px}
+.dots.wide i{height:7px}
+.month-dots{grid-template-columns:repeat(15,1fr)}
+.month-dots i{height:14px}
+.goal-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:14px}
+.goal-row .bar{margin:2px 0}
+
+.detail-hd{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.detail-actions{display:flex;gap:4px}
+.detail-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:auto;padding-top:var(--space-3);border-top:1px solid var(--line)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}
+textarea.input{resize:vertical;font-family:var(--font-body);line-height:1.55}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips .tag{cursor:pointer;font-family:inherit}
+.chips .tag[aria-pressed="false"]:hover{border-color:var(--color-accent);color:var(--color-accent-700)}
+.stats.two{grid-template-columns:1fr 1fr;margin-top:0}
+.config{border:1px solid var(--line)}
+.config summary{padding:10px 12px;cursor:pointer;font:600 10px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent)}
+.config summary:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.config-body{padding:0 12px 12px;display:flex;flex-direction:column;gap:var(--space-3);border-top:1px solid var(--line);padding-top:12px}
+
+@media (max-width: 1100px){ .split{grid-template-columns:1fr} .split-detail{border-left:0;border-top:1px solid var(--line)} }

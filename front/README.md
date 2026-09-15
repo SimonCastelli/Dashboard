@@ -3,7 +3,7 @@
 Front estático: HTML + CSS + JavaScript sin dependencias ni build. Abrí `front/index.html` en el navegador o serví la carpeta (`npx serve front`).
 
 ## Pantallas
-- `index.html` — Hoy: calendario de la semana, bandeja unificada, próximas clases, tareas, hábitos y objetivos.
+- `index.html` — Hoy: calendario con vista Hoy/Semana/Mes, bandeja unificada, próximas clases, tareas, hábitos y objetivos.
 - `facultad.html` — Horario de cursada: vista semana (grilla) y vista por día (rectángulos con horario y aula).
 - `bandeja.html` — Correo de las tres cuentas en una lista, con filtro por cuenta y "→ Tarea".
 
