@@ -147,7 +147,7 @@ a{text-decoration:none}
   .page-hd-actions .btn{flex:1}
 }
 
-/* ── pantallas de gestión: tareas, notas, hábitos, objetivos ── */
+/* ── pantallas de gestión: tareas, hábitos, objetivos ── */
 .page-hd-row{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap}
 .page-hd-actions{display:flex;gap:8px;flex-wrap:wrap}
 .tools{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-3)}
@@ -179,13 +179,9 @@ a{text-decoration:none}
 .detail-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:auto;padding-top:var(--space-3);border-top:1px solid var(--line)}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}
 textarea.input{resize:vertical;font-family:var(--font-body);line-height:1.55}
-.note-title{font-family:var(--font-heading);font-size:24px}
-.note-body{font-family:ui-monospace,Menlo,monospace;font-size:13px}
-.editor-bar{display:flex;align-items:center;gap:2px;border:1px solid var(--line);padding:4px 6px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips .tag{cursor:pointer;font-family:inherit}
 .chips .tag[aria-pressed="false"]:hover{border-color:var(--color-accent);color:var(--color-accent-700)}
-.linked{font-size:13px;border:1px solid var(--line);padding:8px 10px;display:block}
 .stats.two{grid-template-columns:1fr 1fr;margin-top:0}
 .config{border:1px solid var(--line)}
 .config summary{padding:10px 12px;cursor:pointer;font:600 10px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent)}

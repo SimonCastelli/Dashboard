@@ -1,5 +1,5 @@
 // app.js — interacciones del dashboard. Sin dependencias.
-// Estado local en localStorage: todo lo que se toca en la UI (tareas, notas,
+// Estado local en localStorage: todo lo que se toca en la UI (tareas,
 // hábitos, correo→tarea) persiste entre recargas y entre las tres páginas.
 // No hay red ni cuentas reales: esto sigue siendo el mock del README.
 
@@ -8,11 +8,8 @@ const STORE = {
   extraTasks: 'panel.extraTasks',   // [{ id, label, tagText, tagClass, due, done }]
   mailStatus: 'panel.mailStatus',   // { [mailId]: { read, tasked } }
   habitOverride: 'panel.habitOverride', // { [habit]: { [dayIndex]: boolean } }
-  extraNotes: 'panel.extraNotes',   // [string]
   extraEvents: 'panel.extraEvents', // [string]
   taskDetails: 'panel.taskDetails',   // { [taskId]: {label, notes, dueDate, dueTime, priority, list, subtasks} }
-  noteDetails: 'panel.noteDetails',   // { [noteId]: {title, body, tags, pinned} }
-  extraNoteItems: 'panel.extraNoteItems', // [{id, title, body, tagText, tagClass, tags, due}]
   habitDetails: 'panel.habitDetails', // { [habitId]: {name, goal, reminder, freq, days, type, paused} }
   extraHabits: 'panel.extraHabits',   // [{id, name, ...}]
   goalDetails: 'panel.goalDetails',   // { [goalId]: {title, why, target, current, start, end, measure, milestones, status} }
@@ -257,33 +254,6 @@ function setHabitDay(habit, day, on) {
   save(STORE.habitOverride, overrides);
 }
 
-// ── notas ──
-// BASE_NOTES son las de muestra (antes vivían como texto plano en el HTML);
-// notas.html las lista una por una, la vista compacta de "Hoy" las junta en
-// una sola línea — ambas leen de la misma fuente.
-const BASE_NOTES = ['Ideas TP final', 'Resumen SO cap. 4', 'Compras'];
-function getAllNotes() { return BASE_NOTES.concat(load(STORE.extraNotes, [])); }
-function renderNotes() {
-  const p = document.querySelector('[data-notes-text]');
-  if (p) p.textContent = getAllNotes().join(' · ');
-  const list = document.querySelector('[data-notes-list]');
-  if (list) {
-    list.innerHTML = '';
-    getAllNotes().forEach((text) => {
-      const row = document.createElement('div');
-      row.className = 'li';
-      row.textContent = text;
-      list.appendChild(row);
-    });
-  }
-}
-function addNote(text) {
-  const extra = load(STORE.extraNotes, []);
-  extra.push(text);
-  save(STORE.extraNotes, extra);
-  renderNotes();
-}
-
 // ── evento del día de hoy (se repite en cada vista que marca "hoy": la
 // agenda, la semana y el mes comparten [data-today]) ──
 function renderEvents() {
@@ -383,9 +353,7 @@ function saveCapture(sourceInput) {
   const { date, time, tag } = parseCapture(text);
   const kind = selectedKind();
   const dateLabel = date ? formatFriendly(date) : null;
-  if (kind === 'Nota') {
-    addNote(text);
-  } else if (kind === 'Evento') {
+  if (kind === 'Evento') {
     addEvent(dateLabel ? `${dateLabel}${time ? ' ' + time : ''}: ${text}` : text);
   } else {
     addTask({
@@ -553,7 +521,7 @@ document.querySelectorAll('[data-capture-input]').forEach((input) => {
   });
 });
 
-// Selección de fila en las pantallas de gestión (tareas, notas, hábitos,
+// Selección de fila en las pantallas de gestión (tareas, hábitos,
 // objetivos): además de resaltarla, carga sus datos reales en el panel de
 // edición de la derecha (antes siempre mostraba el mismo ítem de muestra,
 // sin importar en cuál se hiciera click).
@@ -567,10 +535,9 @@ document.addEventListener('click', (e) => {
 });
 
 // Chips de selección múltiple (etiquetas, días, "alimentado por", etc.) o
-// exclusiva de a una (data-chips-exclusive: Lista de una tarea, filtro de
-// notas por etiqueta) — en ese caso, elegir una desmarca las demás.
+// exclusiva de a una (data-chips-exclusive: Lista de una tarea) — en ese
+// caso, elegir una desmarca las demás.
 document.addEventListener('click', (e) => {
-  if (e.target.closest('[data-add-tag]')) { addNoteTag(e.target.closest('[data-add-tag]')); return; }
   const chip = e.target.closest('.chips .tag');
   if (!chip) return;
   const exclusiveGroup = chip.closest('[data-chips-exclusive]');
@@ -587,13 +554,11 @@ document.addEventListener('click', (e) => {
     chip.classList.toggle('tag-accent', !on);
     chip.classList.toggle('tag-outline', on);
   }
-  const noteFilter = chip.closest('[data-chips-filter="notes"]');
-  if (noteFilter) filterNotes();
 });
 
 // ════════════════════════════════════════════════════════════════════════
-// Pantallas de gestión (tareas.html, notas.html, habitos.html,
-// objetivos.html): antes de esto, el panel de la derecha era 100% decorativo
+// Pantallas de gestión (tareas.html, habitos.html, objetivos.html): antes
+// de esto, el panel de la derecha era 100% decorativo
 // — mostraba siempre el mismo ítem de muestra sin importar qué fila se
 // seleccionara, y Guardar/Descartar/Eliminar no hacían nada. Todo lo que
 // sigue lo conecta de verdad: seleccionar una fila carga sus datos reales,
@@ -601,7 +566,6 @@ document.addEventListener('click', (e) => {
 // (subtareas, hitos) cuentan y persisten, los filtros filtran de verdad.
 // ════════════════════════════════════════════════════════════════════════
 const PAGE_KIND = document.getElementById('t-title') ? 'tasks'
-  : document.querySelector('.note-title') ? 'notes'
   : document.getElementById('h-name') ? 'habits'
   : document.getElementById('g-name') ? 'goals'
   : null;
@@ -649,7 +613,6 @@ function getChipsMultiValues(containerId) {
   if (!el) return [];
   return Array.from(el.querySelectorAll('.tag[aria-pressed="true"]')).map((c) => c.dataset.value);
 }
-function nowHM() { const d = new Date(); return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`; }
 function flashSaved() {
   const hd = document.querySelector('.detail-hd .k');
   if (!hd) return;
@@ -659,7 +622,6 @@ function flashSaved() {
 }
 function loadDetailForId(id) {
   if (PAGE_KIND === 'tasks') loadTaskDetail(id);
-  else if (PAGE_KIND === 'notes') loadNoteDetail(id);
   else if (PAGE_KIND === 'habits') loadHabitDetail(id);
   else if (PAGE_KIND === 'goals') loadGoalDetail(id);
 }
@@ -806,197 +768,6 @@ const SAMPLE_MAIL_INFO = {
   m5: { subject: 'Domingo en casa', account: 'personal' },
   m6: { subject: 'Material unidad 5', account: 'facultad' },
 };
-
-// ── notas.html: autoguardado, etiquetas, filtros, exportar, markdown ──
-const SAMPLE_NOTES = [
-  { id: 'n1', title: 'Resumen SO — capítulo 4', tagText: 'facultad', tagClass: 'tag-accent', due: 'hoy', pinned: true, tags: ['facultad', 'SO'], linked: 'Sist. Operativos · miércoles 10:00',
-    body: '## Planificación de procesos\n\n**FCFS** — simple, sin inanición, mal tiempo de respuesta con procesos largos adelante.\n**SJF** — óptimo en tiempo medio de espera, necesita estimar la duración.\n**Round robin** — quantum chico = más cambios de contexto = más overhead.\n\n- [ ] Rehacer el ejercicio 7 con quantum 4 ms\n- [x] Tabla comparativa de los tres algoritmos\n\n> Un proceso es un programa en ejecución, con su contador, registros y variables.\n\nPreguntar en clase: ¿cómo se mide el overhead del cambio de contexto en la práctica?' },
-  { id: 'n2', title: 'Ideas TP final', tagText: 'ideas', tagClass: 'tag-neutral', due: '12/09', pinned: true, tags: ['ideas'], linked: '',
-    body: 'Tablero de materias con scraping del SIU + recordatorios de parciales.' },
-  { id: 'n3', title: 'Compras', tagText: 'personal', tagClass: 'tag-outline', due: '11/09', pinned: true, tags: ['personal'], linked: '', body: 'Cuaderno A4, cargador, café.' },
-  { id: 'n4', title: 'Consultas para la cátedra de BD', tagText: 'facultad', tagClass: 'tag-accent', due: '13/09', pinned: false, tags: ['facultad'], linked: '', body: '¿El diagrama ER va con notación Chen o crow’s foot?' },
-  { id: 'n5', title: 'Diario — semana difícil', tagText: 'diario', tagClass: 'tag-outline', due: '13/09', pinned: false, tags: ['diario'], linked: '', body: 'Dormí poco tres días. Bajar la carga del viernes.' },
-  { id: 'n6', title: 'Tanenbaum, cap. 2 — subrayados', tagText: 'lectura', tagClass: 'tag-outline', due: '10/09', pinned: false, tags: ['lectura'], linked: '', body: '"Un proceso es un programa en ejecución", más el modelo de cinco estados.' },
-  { id: 'n7', title: 'Inglés — vocabulario técnico', tagText: 'facultad', tagClass: 'tag-accent', due: '09/09', pinned: false, tags: ['facultad'], linked: '', body: 'deadlock, throughput, overhead, bottleneck.' },
-];
-function getNoteDetailsOverrides() { return load(STORE.noteDetails, {}); }
-function saveNoteDetailOverride(id, patch) {
-  const overrides = getNoteDetailsOverrides();
-  overrides[id] = { ...(overrides[id] || {}), ...patch };
-  save(STORE.noteDetails, overrides);
-}
-function getExtraNoteItems() { return load(STORE.extraNoteItems, []); }
-function getNoteById(id) {
-  const sample = SAMPLE_NOTES.find((n) => n.id === id);
-  const extra = getExtraNoteItems().find((n) => n.id === id);
-  const base = sample || extra;
-  if (!base) return null;
-  return { ...base, ...(getNoteDetailsOverrides()[id] || {}) };
-}
-function getAllNoteItems() {
-  const det = getNoteDetailsOverrides();
-  return SAMPLE_NOTES.map((n) => ({ ...n, ...det[n.id] }))
-    .concat(getExtraNoteItems().map((n) => ({ ...n, ...det[n.id] })))
-    .filter((n) => !n.deleted);
-}
-function loadNoteDetail(id) {
-  const n = getNoteById(id);
-  if (!n) return;
-  currentDetailId = id;
-  setVal('n-title', n.title);
-  setVal('n-body', n.body || '');
-  const status = document.querySelector('[data-note-status]');
-  if (status) status.textContent = 'editando · guardado ' + nowHM();
-  const linked = document.querySelector('[data-note-linked]');
-  if (linked) linked.textContent = n.linked || '—';
-  const pinBtn = document.querySelector('[data-pin-note]');
-  if (pinBtn) pinBtn.setAttribute('aria-pressed', String(!!n.pinned));
-  const tagsWrap = document.getElementById('n-tags');
-  if (tagsWrap) {
-    tagsWrap.querySelectorAll('.tag').forEach((c) => { if (!c.hasAttribute('data-add-tag')) c.remove(); });
-    const addBtn = tagsWrap.querySelector('[data-add-tag]');
-    (n.tags || []).forEach((t) => {
-      const btn = document.createElement('button');
-      btn.className = 'tag tag-accent';
-      btn.setAttribute('aria-pressed', 'true');
-      btn.textContent = t;
-      tagsWrap.insertBefore(btn, addBtn);
-    });
-  }
-}
-let noteSaveTimer = null;
-function scheduleNoteAutosave() {
-  clearTimeout(noteSaveTimer);
-  noteSaveTimer = setTimeout(saveCurrentNote, 400);
-}
-function saveCurrentNote() {
-  if (!currentDetailId) return;
-  const title = document.getElementById('n-title')?.value.trim() || 'Sin título';
-  const body = document.getElementById('n-body')?.value || '';
-  const tags = Array.from(document.querySelectorAll('#n-tags .tag')).filter((c) => !c.hasAttribute('data-add-tag')).map((c) => c.textContent.trim());
-  saveNoteDetailOverride(currentDetailId, { title, body, tags, tagText: tags[0] || '' });
-  refreshNoteRow(currentDetailId);
-  const status = document.querySelector('[data-note-status]');
-  if (status) status.textContent = `editando · guardado ${nowHM()}`;
-}
-function refreshNoteRow(id) {
-  const n = getNoteById(id);
-  if (!n) return;
-  document.querySelectorAll(`[data-id="${id}"][data-list-row]`).forEach((row) => {
-    const label = row.querySelector('.label');
-    if (label) label.textContent = n.title;
-    const meta = row.querySelector('.row-meta');
-    if (meta) meta.textContent = (n.body || '').replace(/^#+\s*/, '').split('\n').find((l) => l.trim()) || '';
-    row.dataset.tag = (n.tags && n.tags[0]) || '';
-  });
-}
-function addNoteTag(btn) {
-  const name = prompt('Nueva etiqueta:');
-  if (!name || !name.trim()) return;
-  const el = document.createElement('button');
-  el.className = 'tag tag-accent';
-  el.setAttribute('aria-pressed', 'true');
-  el.textContent = name.trim();
-  btn.parentElement.insertBefore(el, btn);
-  scheduleNoteAutosave();
-}
-function toggleNotePin() {
-  if (!currentDetailId) return;
-  const n = getNoteById(currentDetailId);
-  saveNoteDetailOverride(currentDetailId, { pinned: !n.pinned });
-  const btn = document.querySelector('[data-pin-note]');
-  if (btn) btn.setAttribute('aria-pressed', String(!n.pinned));
-}
-function deleteNoteDetail() {
-  if (!currentDetailId || !confirm('¿Eliminar esta nota?')) return;
-  saveNoteDetailOverride(currentDetailId, { deleted: true });
-  document.querySelectorAll(`[data-id="${currentDetailId}"]`).forEach((el) => { if (el.matches('[data-list-row]')) el.remove(); });
-  currentDetailId = null;
-  selectFirstRow();
-}
-function duplicateNoteDetail() {
-  if (!currentDetailId) return;
-  const n = getNoteById(currentDetailId);
-  if (!n) return;
-  const items = getExtraNoteItems();
-  const id = 'xn' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  items.push({ ...n, id, title: n.title + ' (copia)', pinned: false });
-  save(STORE.extraNoteItems, items);
-  renderExtraNotesList();
-  selectRowById(id);
-  loadNoteDetail(id);
-}
-function noteToTask() {
-  if (!currentDetailId) return;
-  const n = getNoteById(currentDetailId);
-  if (!n) return;
-  addTask({ label: n.title, tagText: (n.tags && n.tags[0]) || 'personal', tagClass: 'tag-outline', due: 'sin fecha', meta: 'Desde nota "' + n.title + '"' });
-  alert('Se creó una tarea a partir de esta nota.');
-}
-function insertMarkdown(kind) {
-  const ta = document.getElementById('n-body');
-  if (!ta) return;
-  const start = ta.selectionStart, end = ta.selectionEnd;
-  const selected = ta.value.slice(start, end) || 'texto';
-  let text = selected;
-  if (kind === 'bold') text = `**${selected}**`;
-  else if (kind === 'italic') text = `*${selected}*`;
-  else if (kind === 'h2') text = `\n## ${selected}\n`;
-  else if (kind === 'list') text = selected.split('\n').map((l) => `- ${l}`).join('\n');
-  else if (kind === 'checklist') text = selected.split('\n').map((l) => `- [ ] ${l}`).join('\n');
-  else if (kind === 'code') text = `\`${selected}\``;
-  ta.focus();
-  ta.setRangeText(text, start, end, 'end');
-  scheduleNoteAutosave();
-}
-function exportNotesMd() {
-  const notes = getAllNoteItems();
-  const md = notes.map((n) => `# ${n.title}\n\n${n.body || ''}\n`).join('\n---\n\n');
-  const blob = new Blob([md], { type: 'text/markdown' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'notas.md';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-}
-function buildNoteListItem(n) {
-  const li = document.createElement('li');
-  li.className = 'row note-row';
-  li.dataset.listRow = '';
-  li.dataset.id = n.id;
-  li.dataset.tag = (n.tags && n.tags[0]) || '';
-  li.innerHTML =
-    `<div class="row-body"><span class="label">${escapeHtml(n.title)}</span>` +
-    `<span class="row-meta mut">${escapeHtml((n.body || '').slice(0, 90))}</span></div>` +
-    (n.tags && n.tags[0] ? `<span class="tag tag-outline">${escapeHtml(n.tags[0])}</span>` : '') +
-    `<span class="row-due mut num">${escapeHtml(n.due || '')}</span>`;
-  return li;
-}
-function renderExtraNotesList() {
-  const list = document.querySelector('[data-notes-extra]');
-  const hd = document.querySelector('[data-group="extra"]');
-  if (!list) return;
-  const det = getNoteDetailsOverrides();
-  const items = getExtraNoteItems().map((n) => ({ ...n, ...det[n.id] })).filter((n) => !n.deleted);
-  list.innerHTML = '';
-  items.forEach((n) => list.appendChild(buildNoteListItem(n)));
-  list.hidden = items.length === 0;
-  if (hd) hd.hidden = items.length === 0;
-}
-function filterNotes() {
-  const q = (document.querySelector('[data-search="notes"]')?.value || '').toLowerCase().trim();
-  const activeChip = document.querySelector('[data-chips-filter="notes"] .tag[aria-pressed="true"]');
-  const tag = activeChip ? activeChip.dataset.value : 'todas';
-  document.querySelectorAll('.split-list .note-row').forEach((row) => {
-    let show = tag === 'todas' || row.dataset.tag === tag;
-    if (show && q) show = (row.querySelector('.label')?.textContent.toLowerCase() || '').includes(q);
-    row.hidden = !show;
-  });
-  updateGroupVisibility();
-}
 
 // ── habitos.html: streak/cumplimiento en vivo, pausar, nuevo hábito ──
 const SAMPLE_HABITS = [
@@ -1375,22 +1146,15 @@ document.addEventListener('click', (e) => {
   }
   if (e.target.closest('[data-delete-detail]')) {
     if (PAGE_KIND === 'tasks') deleteTaskDetail();
-    else if (PAGE_KIND === 'notes') deleteNoteDetail();
     else if (PAGE_KIND === 'habits') deleteHabitDetail();
     else if (PAGE_KIND === 'goals') deleteGoalDetail();
     return;
   }
   if (e.target.closest('[data-duplicate-detail]')) {
     if (PAGE_KIND === 'tasks') duplicateTaskDetail();
-    else if (PAGE_KIND === 'notes') duplicateNoteDetail();
     return;
   }
   if (e.target.closest('[data-import-bandeja]')) { importFromBandeja(); return; }
-  if (e.target.closest('[data-export-notes]')) { exportNotesMd(); return; }
-  if (e.target.closest('[data-pin-note]')) { toggleNotePin(); return; }
-  if (e.target.closest('[data-note-to-task]')) { noteToTask(); return; }
-  const mdBtn = e.target.closest('[data-md]');
-  if (mdBtn) { insertMarkdown(mdBtn.dataset.md); return; }
   if (e.target.closest('[data-new-habit]')) { createNewHabit(); return; }
   if (e.target.closest('[data-new-goal]')) { createNewGoal(); return; }
   if (e.target.closest('[data-pause-habit]')) { togglePauseHabit(); return; }
@@ -1406,10 +1170,7 @@ document.addEventListener('click', (e) => {
 });
 document.querySelectorAll('[name="task-view"]').forEach((r) => r.addEventListener('change', applyTaskFilters));
 document.querySelector('[data-search="tasks"]')?.addEventListener('input', applyTaskFilters);
-document.querySelector('[data-search="notes"]')?.addEventListener('input', filterNotes);
 document.querySelectorAll('[name="g-range"]').forEach((r) => r.addEventListener('change', applyGoalRangeFilter));
-document.getElementById('n-title')?.addEventListener('input', scheduleNoteAutosave);
-document.getElementById('n-body')?.addEventListener('input', scheduleNoteAutosave);
 document.getElementById('t-sub-add')?.addEventListener('keydown', (e) => {
   if (e.key !== 'Enter' || !currentDetailId) return;
   e.preventDefault();
@@ -1438,11 +1199,9 @@ document.getElementById('g-mile-add')?.addEventListener('keydown', (e) => {
 renderTasksTable();
 renderMailStatuses();
 renderHabits();
-renderNotes();
 renderEvents();
 updateBadges();
 if (PAGE_KIND === 'tasks') { updateTaskSummary(); applyTaskFilters(); }
-if (PAGE_KIND === 'notes') { renderExtraNotesList(); filterNotes(); }
 if (PAGE_KIND === 'habits') { renderHabitPauseStates(); SAMPLE_HABITS.forEach((h) => refreshHabitRowStats(h.id)); }
 if (PAGE_KIND === 'goals') { updateGoalsSummary(); }
 if (PAGE_KIND) selectFirstRow();
